@@ -24,7 +24,9 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         File fichero = new File("C:/Users/josed/Documents/UNIVERSIDAD");
-        getPrev("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", -1);
+        
+       long x=getXrefRecursivo("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",-1);
+        System.out.println("Long: "+x);
     }
 
     public static void mostrarCarpeta(File fichero) {
@@ -44,22 +46,38 @@ public class Main {
         }
     }
 
-    public static String getXref(String path, long offset) {
-        String offsetString = "";
+    
+
+    public static long getXrefRecursivo(String path, long offset) {
+        long offsetInicial=offset;
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
             if (offset == -1) {
-                offset = file.length() - 8;
+                offset = file.length() - 5;
+                file.seek(offset);
+                
+            }
+            else{
+                offset = offset - 7;
+                file.seek(offset);
+            }
+            //COMPRUEBA %%OEF
+                
+                byte EOF[] = new byte[5];
+                file.read(EOF);
+                System.out.println("|" + new String(EOF) + "|");
+                if("%%EOF".equals(new String(EOF))){
+                    System.out.println("si entro");
+                offset = file.getFilePointer() - 8;
                 file.seek(offset);
                 boolean OA = false;
-                boolean OD = false;
-
-                //Busca 0D 0A
+                
+                //Busca BYTE 0A
                 while (!OA) {
-                    byte B[] = new byte[1];
-                    file.read(B);
-                    System.out.println("Nombre:*" + Integer.toHexString(B[0]) + "*");
-                    if ("a".equals(Integer.toHexString(B[0]))) {
+                    byte byteB[] = new byte[1];
+                    file.read(byteB);
+                    System.out.println("BYTE:*" + Integer.toHexString(byteB[0]) + "*");
+                    if ("a".equals(Integer.toHexString(byteB[0]))) {
                         System.out.println("OA");
                         OA = true;
                     } else {
@@ -68,10 +86,9 @@ public class Main {
 
                     file.seek(offset);
                 }
-
-                OA = false;
-                file.seek(offset + 1);
-                
+                file.seek(offset+1);
+                //Recorre hasta BYTE 0D
+                boolean OD = false;
                 while (!OD) {
                     byte B[] = new byte[1];
                     file.read(B);
@@ -82,69 +99,20 @@ public class Main {
 
                     }
                 }
-                System.out.println(offsetString);
-
-            }
+                
+                System.out.println("Xref Offset: |"+offsetString+"|");
+                offset=Long.parseLong(offsetString);
+                }
+                else{
+                    return offset+7;
+                }
+                
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return offsetString;
-    }
-
-    public static String getPrev(String path, long offset) {
-        String offsetString = "";
-        try {
-            RandomAccessFile file = new RandomAccessFile(path, "rw");
-
-            if (offset == -1) {
-                offset = file.length();
-                file.seek(offset);
-            } else {
-                file.seek(offset);
-            }
-
-            boolean prev = false;
-            int j=0;
-            while (!prev) {
-                byte B[] = new byte[1];
-                file.read(B);
-                if ("/".equals(new String(B))) {
-                    j++;
-                    if(j==2){
-                        prev = true;
-                    }
-                    else{
-                        offset -= 1;
-                    }
-                } else {
-                    offset -= 1;
-                }
-
-                file.seek(offset);
-            }
-            file.seek(offset + 6);
-            boolean slash=false;
-            while (!slash) {
-                    byte B[] = new byte[1];
-                    file.read(B);
-                    if ("/".equals(new String(B))) {
-                        slash = true;
-                    } else {
-                        offsetString += new String(B);
-
-                    }
-                }
-            System.out.println("*"+offsetString+"*");
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return  offsetString;
+        return getXrefRecursivo(path, offset);
     }
 
     public static boolean isPDF(String name) {
