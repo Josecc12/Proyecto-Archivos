@@ -49,6 +49,7 @@ public class Main {
     
 
     public static long getXrefRecursivo(String path, long offset) {
+        String offsetString="";
         long offsetInicial=offset;
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
