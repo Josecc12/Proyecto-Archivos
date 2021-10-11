@@ -314,6 +314,13 @@ public class Main {
        return  Long.valueOf(new String(offsetObj));
     }
     
+    public static void getObjPages(String path,long offset){
+        boolean obj=false;
+        while(!obj){
+            
+        }
+    }
+    
     public static boolean isPDF(String name) {
 
         int len = name.length();
