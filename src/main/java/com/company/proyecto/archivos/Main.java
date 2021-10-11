@@ -23,14 +23,95 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        File fichero = new File("C:/Users/josed/Documents/Experimento 3.pdf");
+        File fichero = new File("C:/Users/Adrian/Documents/Universdidad/Prueba1/Hola.pdf");
         
-       long x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
+       long x=getXrefRecursivo("C:/Users/Adrian/Documents/Universdidad/Prueba1/Hola.pdf",-1);
        
-        int obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
-        long e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
+        int obj=getInfoObj("C:/Users/Adrian/Documents/Universdidad/Prueba1/Hola.pdf");
+        long e=getOffsetObj("C:/Users/Adrian/Documents/Universdidad/Prueba1/Hola.pdf",x , obj);
         System.out.println(e);
+        ReadData(e,"C:/Users/Adrian/Documents/Universdidad/Prueba1/Hola.pdf");
+        
     }
+    
+    public  static void ReadData(long e,String path){  // Leer infrmacion del PDF
+        try {
+            RandomAccessFile file = new RandomAccessFile(path,"r");
+            
+            
+            boolean endobj = false;
+            
+            file.seek(e);
+            
+            while(!endobj){
+                String etiqueta = "";
+                String data = "";
+                byte info[] = new byte[1];
+                file.read(info);
+                
+                if("/".equals(new String(info))){
+                    boolean fin = false;
+   
+                    while(!fin){
+                        
+                        byte info_e[] = new byte[1];
+                        file.read(info_e);
+                    
+                        if("(".equals(new String(info_e))){
+                            System.out.println("Etiqueta: " + etiqueta);
+                            etiqueta+="|";
+                            boolean fin2 = false;
+                            
+                            while(!fin2){
+                            byte info_d[] = new byte[1];
+                            file.read(info_d);
+                            
+                            if(")".equals(new String(info_d))){
+                             System.out.println("Data: " + data);
+                             data+="|";
+                             fin2 = true;
+                             
+                            }else{
+                             data+= new String(info_d);
+                            }
+                        
+                            
+                            }
+                         fin = true;
+                         
+                       
+                         }else{
+                        etiqueta+= new String(info_e);
+                        
+                    
+                        }
+                    
+                    }
+                    
+                }
+                
+                if(">".equals(new String(info))){
+                     
+                    endobj = true;
+                    
+                   
+                }
+                
+                
+                
+            }
+            
+            
+           
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     public static void mostrarCarpeta(File fichero) {
         if (fichero.isDirectory()) {
@@ -49,7 +130,7 @@ public class Main {
         }
     }
 
-    
+  
 
     public static long getXrefRecursivo(String path, long offset) {
         String offsetString="";
