@@ -31,6 +31,8 @@ public class Main {
         long e=getOffsetObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",x , 1);
         System.out.println(e);
         getObjPages("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", e);
+        e=getOffsetObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", x, 2);
+        getCountPages("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", e);
     }
 
     public static void mostrarCarpeta(File fichero) {
@@ -49,8 +51,7 @@ public class Main {
             }
         }
     }
-
-    
+   
 
     public static long getXrefRecursivo(String path, long offset) {
         String offsetString="";
@@ -315,7 +316,7 @@ public class Main {
        return  Long.valueOf(new String(offsetObj));
     }
     
-    public static void getObjPages(String path,long offset){
+    public static int getObjPages(String path,long offset){
        RandomAccessFile file;
        String objString="";
         try {
@@ -361,6 +362,49 @@ public class Main {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return Integer.valueOf(objString);     
+    }
+    
+    public static int getCountPages(String path,long offset){
+        RandomAccessFile file;
+         String countPages="";
+        try {
+            file = new RandomAccessFile(path, "rw");
+            file.seek(offset);
+            boolean count=false;
+            while(!count){
+                byte byteB[]=new byte[1];
+                file.read(byteB);
+                if("/".equals(new String(byteB))){
+                    byte countString[] = new byte[5];
+                    file.read(countString); 
+                    if("Count".equals(new String(countString))){
+                       count=true;
+                       file.read(); 
+                       boolean isRead=false;
+                       while(!isRead){
+                           file.read(byteB);
+                            if("/".equals(new String(byteB))){
+                                isRead=true;
+                            }
+                            else{
+                                countPages+=new String(byteB);
+                            }
+                       }
+                    }
+                    else{
+                        file.seek(file.getFilePointer()-4);
+                    }
+                }
+            }
+            System.out.println(countPages);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return  Integer.valueOf(countPages);    
             
     }
     
