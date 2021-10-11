@@ -23,13 +23,14 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        File fichero = new File("C:/Users/josed/Documents/Experimento 3.pdf");
+        File fichero = new File("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf");
         
-       long x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
+       long x=getXrefRecursivo("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",-1);
        
-        int obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
-        long e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
+        int obj=getInfoObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf");
+        long e=getOffsetObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",x , 1);
         System.out.println(e);
+        getObjPages("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", e);
     }
 
     public static void mostrarCarpeta(File fichero) {
@@ -315,10 +316,52 @@ public class Main {
     }
     
     public static void getObjPages(String path,long offset){
-        boolean obj=false;
-        while(!obj){
+       RandomAccessFile file;
+       String objString="";
+        try {
+            file = new RandomAccessFile(path, "rw");
+            file.seek(offset);
+            boolean obj=false;
             
+            while(!obj){
+                byte byteB[]=new byte[1];
+                file.read(byteB);
+                if("/".equals(new String(byteB))){
+                    byte pagesString[] = new byte[5];
+                    file.read(pagesString);
+                    
+                    System.out.println("*"+new String(pagesString));
+                    if("Pages".equals(new String(pagesString))){
+                        System.out.println("Si");
+                        obj=true;
+                        file.read();
+                        boolean isRead=false;
+                        while(!isRead){
+                            file.read(byteB);
+                            if("20".equals(Integer.toHexString(byteB[0]))){
+                                isRead=true;
+                            }
+                            else{
+                                objString+=new String(byteB);
+                            }
+                        }
+                    }
+                    else{
+                        file.seek(file.getFilePointer()-4);
+                    }
+                    
+                }
+                
+            } 
+            
+            System.out.println(objString);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }
     
     public static boolean isPDF(String name) {
