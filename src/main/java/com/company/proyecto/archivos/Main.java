@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,14 +26,18 @@ public class Main {
         // TODO code application logic here
         File fichero = new File("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf");
         
-       long x=getXrefRecursivo("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",-1);
        
-        int obj=getInfoObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf");
-        long e=getOffsetObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf",x , 1);
+        long x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
+        int obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
+        long e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , 1);
         System.out.println(e);
-        getObjPages("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", e);
-        e=getOffsetObj("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", x, 2);
-        getCountPages("C:/Users/josed/Documents/PRUEBAS DE ARCHIVOS.pdf", e);
+        getObjPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
+        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, 2);
+        getCountPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
+        getKidsPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
+        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, 3);
+        getObjFont("C:/Users/josed/Documents/Experimento 3.pdf", e);
+       
     }
 
     public static void mostrarCarpeta(File fichero) {
@@ -406,6 +411,112 @@ public class Main {
         
         return  Integer.valueOf(countPages);    
             
+    }
+    
+    public static void getKidsPages(String path, long offset){
+        ArrayList<Integer> kidsList = new ArrayList<Integer>();
+        String objKid="";
+        try {
+            RandomAccessFile file = new RandomAccessFile(path, "rw");
+            file.seek(offset);
+            boolean kids=false;
+            while(!kids){
+                byte byteB[]=new byte[1];
+                file.read(byteB);
+                if("/".equals(new String(byteB))){
+                    byte kidsLabel[] = new byte[5];
+                    file.read(kidsLabel);
+                    if("Kids[".equals(new String(kidsLabel))){
+                       kids=true;
+                       boolean isRead=false;
+                       int i=0;
+                       while(!isRead){
+                           file.read(byteB);
+                           if("]".equals(new String(byteB))){
+                               isRead=true;
+                           }
+                           else if("20".equals(Integer.toHexString(byteB[0]))){
+                                i++;
+                            }
+                           
+                           if(i==2){
+                               int x=Integer.parseInt(objKid.replace(" ",""));
+                               kidsList.add(x);
+                               file.seek(file.getFilePointer()+3);
+                               i=0;
+                               objKid="";
+                           }
+                           else{
+                               objKid+=new String(byteB);
+                               
+                           }
+                       }
+                    }
+                    else{
+                        file.seek(file.getFilePointer()-4);
+                    }
+                    
+                }
+            }
+            System.out.println("Values");
+            for(int i=0;i<kidsList.size();i++){
+                System.out.println(kidsList.get(i));
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void getObjFont(String path,long offset){
+         RandomAccessFile file;
+        String objFont="";
+        try {
+            file = new RandomAccessFile(path, "rw");
+            file.seek(offset);
+            boolean font=false;
+            while(!font){
+                byte byteB[]=new byte[1];
+                file.read(byteB);
+               if("/".equals(new String(byteB))){
+                   byte fontLabel[] = new byte[6];
+                    file.read(fontLabel);
+                     if("Font<<".equals(new String(fontLabel))){
+                         font=true;
+                         file.read();
+                         file.read();
+                         file.read();
+                         file.read();
+                         boolean isRead=false;
+                         while(!isRead){
+                             file.read(byteB);
+                             if("20".equals(Integer.toHexString(byteB[0]))){
+                                 isRead=true;
+                             }
+                             else{
+                                 objFont+=new String(byteB);
+                             }
+                         }
+                     }
+                     else{
+                         file.seek(file.getFilePointer()-5);
+                     }
+               } 
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println(objFont);
+            
+    }
+    
+    public static void getFontName(String path,long offset){
+        
     }
     
     public static boolean isPDF(String name) {
