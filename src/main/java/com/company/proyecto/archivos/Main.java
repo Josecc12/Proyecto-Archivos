@@ -40,8 +40,7 @@ public class Main {
        
         
         x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
-       
-         obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
+        obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
         e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
         System.out.println(e);
         ReadData(e,"C:/Users/josed/Documents/Experimento 3.pdf");
@@ -557,7 +556,7 @@ public class Main {
     }
     
     public static void getObjFont(String path,long offset){
-         RandomAccessFile file;
+        RandomAccessFile file;
         String objFont="";
         try {
             file = new RandomAccessFile(path, "rw");
