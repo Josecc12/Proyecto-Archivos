@@ -38,7 +38,94 @@ public class Main {
         e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, 3);
         getObjFont("C:/Users/josed/Documents/Experimento 3.pdf", e);
        
+        
+        x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
+       
+         obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
+        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
+        System.out.println(e);
+        ReadData(e,"C:/Users/josed/Documents/Experimento 3.pdf");
+        
     }
+    
+    public  static void ReadData(long e,String path){  // Leer infrmacion del PDF
+        try {
+            RandomAccessFile file = new RandomAccessFile(path,"r");
+            
+            
+            boolean endobj = false;
+            
+            file.seek(e);
+            
+            while(!endobj){
+                String etiqueta = "";
+                String data = "";
+                byte info[] = new byte[1];
+                file.read(info);
+                
+                if("/".equals(new String(info))){
+                    boolean fin = false;
+   
+                    while(!fin){
+                        
+                        byte info_e[] = new byte[1];
+                        file.read(info_e);
+                    
+                        if("(".equals(new String(info_e))){
+                            System.out.println("Etiqueta: " + etiqueta);
+                            etiqueta+="|";
+                            boolean fin2 = false;
+                            
+                            while(!fin2){
+                            byte info_d[] = new byte[1];
+                            file.read(info_d);
+                            
+                            if(")".equals(new String(info_d))){
+                             System.out.println("Data: " + data);
+                             data+="|";
+                             fin2 = true;
+                             
+                            }else{
+                             data+= new String(info_d);
+                            }
+                        
+                            
+                            }
+                         fin = true;
+                         
+                       
+                         }else{
+                        etiqueta+= new String(info_e);
+                        
+                    
+                        }
+                    
+                    }
+                    
+                }
+                
+                if(">".equals(new String(info))){
+                     
+                    endobj = true;
+                    
+                   
+                }
+                
+                
+                
+            }
+            
+            
+           
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     public static void mostrarCarpeta(File fichero) {
         if (fichero.isDirectory()) {
