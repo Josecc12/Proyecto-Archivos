@@ -602,7 +602,12 @@ public class Main {
     }
     
     public static void getFontName(String path,long offset){
-        
+        try {
+            RandomAccessFile file = new RandomAccessFile(path, "rw");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     public static boolean isPDF(String name) {
