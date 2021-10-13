@@ -629,7 +629,6 @@ public class Main {
         }
         return obj;
     }
-}
     
      public static int getrootObj(String path){
         String obj="";
