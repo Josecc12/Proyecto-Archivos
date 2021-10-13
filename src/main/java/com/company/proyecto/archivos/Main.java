@@ -28,23 +28,30 @@ public class Main {
         
        
         long x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
-        int obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
-        long e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , 1);
-        System.out.println(e);
-        getObjPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
-        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, 2);
-        getCountPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
-        getKidsPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
-        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, 3);
-        getObjFont("C:/Users/josed/Documents/Experimento 3.pdf", e);
-       
-        
-        x=getXrefRecursivo("C:/Users/josed/Documents/Experimento 3.pdf",-1);
-        obj=getInfoObj("C:/Users/josed/Documents/Experimento 3.pdf");
-        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
-        System.out.println(e);
-        ReadData(e,"C:/Users/josed/Documents/Experimento 3.pdf");
-        
+        int obj=getrootObj("C:/Users/josed/Documents/Experimento 3.pdf");
+        long e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , obj);
+        int pages=getObjPages("C:/Users/josed/Documents/Experimento 3.pdf", e);
+        e=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf",x , pages);
+        ArrayList<Integer> arr=getKidsPages("C:/Users/josed/Documents/Experimento 3.pdf",e );
+        ArrayList<String> fonts=new ArrayList<String>();
+        for(int i=0;i<arr.size();i++){
+            System.out.println("OBJ:"+arr.get(i));
+            long offset=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, arr.get(i));
+            int objF=getObjFont("C:/Users/josed/Documents/Experimento 3.pdf", offset);
+            offset=getOffsetObj("C:/Users/josed/Documents/Experimento 3.pdf", x, objF);
+            
+            
+            String font=getFontName("C:/Users/josed/Documents/Experimento 3.pdf", offset);
+            if(!fonts.contains(font)){
+                fonts.add(font);
+            }
+            
+
+        }
+            System.out.println("FUENTES:");
+            for(int j=0;j<fonts.size();j++){
+                System.out.println(fonts.get(j));
+            }
     }
     
     public  static void ReadData(long e,String path){  // Leer infrmacion del PDF
@@ -383,18 +390,12 @@ public class Main {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
             xref+=6;
             file.seek(xref);
-            System.out.println(inRange(path, file.getFilePointer(), obj));
-            System.out.println(startRange(path, xref));
             int position=obj-startRange(path, xref);
-            System.out.println(file.getFilePointer());
             file.read();
             file.read();
             long offset=position*20+beforeObj(path, xref);
-            System.out.println("long:"+offset);
             file.seek(offset);
             file.read(offsetObj);
-            
-            System.out.println(new String(offsetObj));
             
             
             
@@ -499,7 +500,7 @@ public class Main {
             
     }
     
-    public static void getKidsPages(String path, long offset){
+    public static ArrayList<Integer> getKidsPages(String path, long offset){
         ArrayList<Integer> kidsList = new ArrayList<Integer>();
         String objKid="";
         try {
@@ -544,18 +545,16 @@ public class Main {
                     
                 }
             }
-            System.out.println("Values");
-            for(int i=0;i<kidsList.size();i++){
-                System.out.println(kidsList.get(i));
-            }
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return kidsList;
     }
     
-    public static void getObjFont(String path,long offset){
+    public static int getObjFont(String path,long offset){
         RandomAccessFile file;
         String objFont="";
         try {
@@ -597,12 +596,51 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        System.out.println(objFont);
+        
+        return  Integer.valueOf(objFont); 
             
     }
     
-    public static void getFontName(String path,long offset){
-        
+    public static String getFontName(String path,long offset){
+        String nameFont="";
+        try {
+            RandomAccessFile file = new RandomAccessFile(path, "rw");
+            file.seek(offset);
+
+            boolean font=false;
+            while(!font){
+                byte byteB[]=new byte[1];
+                file.read(byteB);
+                if("/".equals(new String(byteB))){
+                    byte baseFont[] = new byte[9];
+                    file.read(baseFont);
+                    if("BaseFont/".equals(new String(baseFont))){
+                        font=true;
+                        boolean isRead=false;
+                        while(!isRead){
+                            file.read(byteB);
+                            if("/".equals(new String(byteB))){
+                                isRead=true;
+                            }
+                            else{
+                                nameFont+=new String(byteB);
+                            }
+                        }
+                    }
+                    else{
+                        file.seek(file.getFilePointer()-8);
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return nameFont;
     }
 
 
