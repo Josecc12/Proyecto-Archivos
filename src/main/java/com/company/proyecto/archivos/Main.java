@@ -604,6 +604,81 @@ public class Main {
     public static void getFontName(String path,long offset){
         
     }
+
+
+     public static long getFileSize(String path){
+        long sizeF;
+        File file= new File(path);
+        sizeF = file.length();
+        return sizeF;
+    }
+
+    public static String getVersion(String path){
+        String obj = "";
+        try{
+            RandomAccessFile file = new RandomAccessFile(path, "rw");
+            long offset = 0;
+            file.seek(offset);
+            byte byteB[] = new byte[3];
+             String line = file.readLine();
+            obj = line.substring(5,8);
+        }catch(FileNotFoundException ex){
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
+     public static int getrootObj(String path){
+        String obj="";
+        try {
+            RandomAccessFile file = new RandomAccessFile(path, "rw");
+            long offset = file.length();
+            file.seek(offset);
+            boolean root=false;
+            while(!root){
+                byte byteB[] = new byte[1];
+                file.read(byteB);
+                System.out.println("|"+Integer.toHexString(byteB[0])+"|");
+                if("/".equals(new String(byteB))){
+                    byte rootString[] = new byte[4];
+                    file.read(rootString);
+                    System.out.println("O: |"+new String(rootString)+"|");
+                    if("Root".equals(new String(rootString))){
+                        file.read(byteB);
+                        System.out.println(Integer.toHexString(byteB[0]));
+                        boolean isRead=false;
+                        while(!isRead){
+                            file.read(byteB);
+                            if("20".equals(Integer.toHexString(byteB[0]))){
+                                isRead=true;
+                            }
+                            else{
+                                obj+=new String(byteB);
+                            }
+                        }
+                        root=true;
+                    }
+                    else{
+                       offset -= 4; 
+                    }
+                    
+                }else{
+                    offset -= 1;
+                }
+                file.seek(offset);
+                System.out.println("OBJ:"+obj);
+                
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return Integer.valueOf(obj);
+    }
     
     public static boolean isPDF(String name) {
 
