@@ -12,6 +12,7 @@ import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PdfMetadata {
     String path;
@@ -54,7 +55,13 @@ public class PdfMetadata {
         long size=getFileSize();
         int countPages = getCountPages(offsetObjPages);
         
-        
+        //Info-Images
+        int Images = 0;
+        for(int i=0;i<arr.size();i++){
+            long offset = getOffsetObj(xref, arr.get(i));
+            Images = contImages(offset);
+
+        }
 
         
 
@@ -66,8 +73,11 @@ public class PdfMetadata {
         for (int j = 0; j < fonts.size(); j++) {
             System.out.println(fonts.get(j));
         }
+        System.out.println("Cantidad de imagenes: " + Images);
 
     }
+
+  
 
     public long getXref(long offset) {
         String offsetString = "";
@@ -649,5 +659,64 @@ public class PdfMetadata {
         return Integer.valueOf(countPages);
 
     }
+
+    
+    public int contImages(long offset){
+        int cont = 0;
+        try {
+            RandomAccessFile file = new RandomAccessFile(path,"r");
+            
+            file.seek(offset);
+            boolean endobj = false;
+
+            while(!endobj){
+                byte[] images = new byte[1];
+                file.read(images);
+                if("/".equals(new String(images))){
+                    
+                    boolean xobject = false;
+                    while(!xobject){
+                        byte[] xobj = new byte[1];
+                        file.read(xobj);
+                        if("X".equals(new String(xobj))){
+                            
+                            boolean aux = false;
+                            while(!aux){
+                                byte[] imagesCont = new byte[1];
+                                file.read(imagesCont);
+                                if("/".equals(new String(imagesCont))) cont++;
+                                if(">".equals(new String(imagesCont))){
+                                    aux = true;
+                                    
+                                }
+
+                            }
+                        }
+                        if("[".equals(new String(xobj))){
+                            
+                            xobject = true;
+                            endobj = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return cont;
+       
+    }
+
+
+
+
 
 }

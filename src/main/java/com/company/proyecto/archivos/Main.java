@@ -26,7 +26,7 @@ public class Main {
         // TODO code application logic here
         
         
-        PdfMetadata pdf=new PdfMetadata("C:/Users/josed/Documents/Experimento 3.pdf");
+        PdfMetadata pdf=new PdfMetadata("C:/Users/Adrian/Documents/Universdidad/Prueba1/Esta es la prueba 3.pdf");
         
     }
     
