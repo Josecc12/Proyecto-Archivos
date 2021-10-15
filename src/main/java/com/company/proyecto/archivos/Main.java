@@ -25,12 +25,18 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        
-        PdfMetadata pdf=new PdfMetadata("C:/Users/Adrian/Documents/Universdidad/Prueba1/Esta es la prueba 3.pdf");
+       File file=new File("C:/Users/josed/Documents/Carpeta Prueba Archivos");
+       mostrarCarpeta(file); 
+
+
         
     }
     
-  
+  /**
+   * Metodo para recorrer un directorio recursivamente 
+   * En busca de formtamos PDF y leer sus metadatos
+   * @param fichero con el directorio a explorar
+   */
     public static void mostrarCarpeta(File fichero) {
         if (fichero.isDirectory()) {
             File[] lista = fichero.listFiles();
@@ -42,13 +48,22 @@ public class Main {
                 } else {
                     if (isPDF(name)) {
                         System.out.println(lista[i].getName());
+                        String path=lista[i].getAbsolutePath().replace("\\", "/");
+                        PdfMetadata pdf=new PdfMetadata(path);
+                        System.out.println();
+                        System.out.println();
+                        System.out.println();
                     }
                 }
             }
         }
     }
    
-
+    /**
+     * Metodo para determinar si un fichero es extension PDF
+     * @param name path del fichero
+     * @return booleano si es PDF
+     */
     public static boolean isPDF(String name) {
 
         int len = name.length();

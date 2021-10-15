@@ -1,0 +1,45 @@
+@options
+@packages
+@argfile
+-encoding
+'UTF-8'
+-protected
+-source
+'16'
+-sourcepath
+'C:/Users/josed/Documents/UNIVERSIDAD/ARCHIVOS/Proyecto-Archivos/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/josed/Documents/UNIVERSIDAD/ARCHIVOS/Proyecto-Archivos/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Proyecto-Archivos 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Proyecto-Archivos 1.0-SNAPSHOT API'
+com.company.proyecto.archivos
+'C:/Users/josed/Documents/UNIVERSIDAD/ARCHIVOS/Proyecto-Archivos/src/main/java/com/company/proyecto/archivos/Main.java'
+'C:/Users/josed/Documents/UNIVERSIDAD/ARCHIVOS/Proyecto-Archivos/src/main/java/com/company/proyecto/archivos/PdfMetadata.java'
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\src\main\java = 1632840565475
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\allclasses-index.html = 1634266888340
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\allpackages-index.html = 1634266888348
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\element-list = 1634266888105
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\help-doc.html = 1634266888454
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\index-all.html = 1634266888437
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\index.html = 1634266888443
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\jquery-ui.overrides.css = 1634266888682
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\member-search-index.js = 1634266888362
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\module-search-index.js = 1634266888352
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\overview-tree.html = 1634266888292
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\package-search-index.js = 1634266888356
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\script.js = 1634266888506
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\search.js = 1634266888532
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\stylesheet.css = 1634266888480
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\tag-search-index.js = 1634266888384
+C:\Users\josed\Documents\UNIVERSIDAD\ARCHIVOS\Proyecto-Archivos\target\site\apidocs\type-search-index.js = 1634266888359

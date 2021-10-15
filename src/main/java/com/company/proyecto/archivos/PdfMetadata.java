@@ -14,10 +14,19 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Adrian Quixivix, Jose Chocoy, Emilio medina , Andre Gordillo
+ * Clase para extraer metadatos demanera binaria de un fichero PDF
+ */
+
 public class PdfMetadata {
     String path;
     long xref;
 
+    /**
+     * Crea la classe PDFMetadata recibiendo como parametros:
+     * @param path  String de el path abosulo del fichero PDF
+     */
     public PdfMetadata(String path) {
         this.path = path;
 
@@ -78,7 +87,12 @@ public class PdfMetadata {
     }
 
   
-
+    /**
+     * Metodo para Obtener el offset de la tabla Xref de manera
+     * recursiva, con lectura binaria hacia atras
+     * @param offset un offset inicial -1 para la primera recusion
+     * @return el offset de la tabla xref
+     */
     public long getXref(long offset) {
         String offsetString = "";
         long offsetInicial = offset;
@@ -141,6 +155,11 @@ public class PdfMetadata {
         return getXref(offset);
     }
 
+    /**
+     * Metodo para obtner la etiqueta /Info de un pdf y el objeto 
+     * que lo contiene en xref table
+     * @return indice del objeto con la etiqueta /Info
+     */
     public int getInfoObj() {
         String obj = "";
         try {
@@ -186,6 +205,12 @@ public class PdfMetadata {
         return Integer.valueOf(obj);
     }
 
+    /**
+     * Metodo para obtner la etiquet /Root de un pdf y el objeto 
+     * que lo contiene en xref table
+     * @return indice del objeto con la etiquet /Root
+     */
+    
     public int getRootObj() {
         String obj = "";
         try {
@@ -230,6 +255,12 @@ public class PdfMetadata {
         return Integer.valueOf(obj);
     }
 
+    /**
+     * Metodo para obtner el objeto con la fuente de un pagina pdf
+     * @param offset de la pagina a la que se hace referencia
+     * @return indice del objeto con la fuente
+     */
+    
     public int getObjFont(long offset) {
         RandomAccessFile file;
         String objFont = "";
@@ -274,6 +305,11 @@ public class PdfMetadata {
 
     }
 
+    /**
+     * Metodo para obtner el objeto con la estructura de las paginas del pdf
+     * @param offset del objeto /Root
+     * @return indice del objeto /Pages
+     */
     public int getObjPages(long offset) {
         RandomAccessFile file;
         String objString = "";
@@ -318,6 +354,12 @@ public class PdfMetadata {
         return Integer.valueOf(objString);
     }
 
+    /**
+     * Metodo para obtener el offset de un objeto de la tabla xref
+     * @param xref offset de la tabla xref
+     * @param obj objeto del que se desea el offset
+     * @return  offset del Objeto buscado
+     */
     public long getOffsetObj(long xref, int obj) {
         byte offsetObj[] = new byte[10];
         try {
@@ -340,6 +382,13 @@ public class PdfMetadata {
         return Long.valueOf(new String(offsetObj));
     }
 
+    /**
+     * Metodo para verificar que un objeto se encuentra en el rango
+     * de la tabla xref
+     * @param offset de la tabla xref table
+     * @param obj objeto al que se busca en la xref table
+     * @return booleano si esta en rango
+     */
     public boolean inRange(long offset, int obj) {
         boolean inRange = false;
         try {
@@ -386,6 +435,12 @@ public class PdfMetadata {
         return inRange;
     }
 
+    /**
+     * Metodo para obtener el primer rango de la tabla Xref
+     * @param offset de la tabla xref
+     * @return valor inicial de la tabal Xref
+     */
+    
     public int startRange(long offset) {
         String startRangeString = "";
         try {
@@ -413,6 +468,12 @@ public class PdfMetadata {
         return Integer.valueOf(startRangeString);
     }
 
+    
+    /**
+     * Metodo para obtener el offset justo antes de los objetos de la Xref Table
+     * @param offset de la tabla Xref
+     * @return  offset al inicio de los objetos
+     */
     public long beforeObj(long offset) {
         boolean OA = false;
         try {
@@ -438,6 +499,11 @@ public class PdfMetadata {
         return offset;
     }
 
+    /**
+     * Metodo para obtener todos los objetos con la etiqueta /Page dentro de un PDF
+     * @param offset del objeto Con la estructura de las paginas
+     * @return ArrayList con los indices de los objetos /Pages
+     */
     public ArrayList<Integer> getKidsPages(long offset) {
         ArrayList<Integer> kidsList = new ArrayList<Integer>();
         String objKid = "";
@@ -489,6 +555,10 @@ public class PdfMetadata {
         return kidsList;
     }
 
+    /**
+     * Metodo para obtener el peso de un archivo PDF en Bytes
+     * @return Bytes del PDF
+     */
     public long getFileSize() {
         long sizeF;
         File file = new File(path);
@@ -496,6 +566,10 @@ public class PdfMetadata {
         return sizeF;
     }
 
+    /**
+     * Metodo para obtener la version del PDF
+     * @return Version del PDF
+     */
     public String getVersion() {
         String obj = "";
         try {
@@ -513,6 +587,12 @@ public class PdfMetadata {
         return obj;
     }
 
+    /**
+     * Metodo para obtener el nombre de la fuente utilizada en una pagina 
+     * especifica del PDF
+     * @param offset del objeto en el que se encuentra la etiqueta /Font
+     * @return Nombre de la fuente utilizada.
+     */
     public String getFontName(long offset) {
         String nameFont = "";
         try {
@@ -553,13 +633,17 @@ public class PdfMetadata {
         return nameFont;
     }
 
-    public void ReadData(long e) { // Leer infrmacion del PDF
+    /**
+     * Metodo para obtener los metadatos del PDF
+     * @param offset de la etiqueta /Info
+     */
+    public void ReadData(long offset) { // Leer infrmacion del PDF
         try {
             RandomAccessFile file = new RandomAccessFile(path, "r");
 
             boolean endobj = false;
 
-            file.seek(e);
+            file.seek(offset);
 
             while (!endobj) {
                 String etiqueta = "";
@@ -620,6 +704,11 @@ public class PdfMetadata {
         }
     }
 
+    /**
+     * Metodo para obtener el numero de Paginas de un PDF
+     * @param offset del objeto con la estructura de las paginas
+     * @return contador de paginas en el PDF
+     */
     public int getCountPages(long offset) {
         RandomAccessFile file;
         String countPages = "";
@@ -660,7 +749,11 @@ public class PdfMetadata {
 
     }
 
-    
+    /**
+     * Metodo para obtener el numero de Imagenes de un PDF
+     * @param offset de la pagina a buscar imagenes
+     * @return contador de imagenes en la pagina
+     */
     public int contImages(long offset){
         int cont = 0;
         try {
