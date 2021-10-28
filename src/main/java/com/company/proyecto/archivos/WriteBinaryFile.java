@@ -25,6 +25,10 @@ public class WriteBinaryFile {
     public void writeFile(){
         try {
             RandomAccessFile file=new RandomAccessFile("datos.bin","rw");
+            //String namePdf=
+            String version=this.pdf.getVersion();
+            Long size=this.pdf.getFileSize();
+            
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WriteBinaryFile.class.getName()).log(Level.SEVERE, null, ex);
