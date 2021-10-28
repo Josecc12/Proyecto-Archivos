@@ -52,7 +52,8 @@ public class Main {
                         PdfMetadata pdf=new PdfMetadata(path);
                         System.out.println();
                         System.out.println();
-                        System.out.println();
+                       System.out.println(pdf.getNamePDF()+pdf.getVersionPDF()+pdf.getSizePDF()+pdf.getPagesPDF() +pdf.getFontsPDF()+pdf.getImagesPDF());
+                        
                     }
                 }
             }
