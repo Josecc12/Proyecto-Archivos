@@ -13,7 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Adrian Quixivix, Jose Chocoy, Emilio medina , Andre Gordillo
@@ -21,16 +23,13 @@ import java.util.Map;
  */
 
 public class PdfMetadata {
+    
    private String path;
     private long xref;
+    private PDF pdf;
     
-   private String namePDF;
-   private String versionPDF;
-   private Long sizePDF;
-   private Map<String,String> metadataPDF;
-   private int pagesPDF;
-   private  ArrayList<String> fontsPDF;
-   private int imagesPDF;
+
+    
     
 
     /**
@@ -82,56 +81,45 @@ public class PdfMetadata {
             Images = contImages(offset);
 
         }
-        this.namePDF =file.getName();
-        this.versionPDF=verisonPDf;
-        this.sizePDF=size;
-        this.pagesPDF=countPages;
-        this.fontsPDF=fonts;
+        
+        this.pdf = new PDF();
+        this.pdf.setName(file.getName());
+        this.pdf.setVersion(verisonPDf);
+        this.pdf.setSize(size);
+        this.pdf.setPages(countPages);
+        this.pdf.setFonts(fonts);
+        this.pdf.setMetadata(this.ReadData(offsetobjInfo));
+        this.pdf.setImages(Images);
+        
+        
+        //this.namePDF =file.getName();
+       // this.versionPDF=verisonPDf;
+        //this.sizePDF=size;
+       // this.pagesPDF=countPages;
+        //this.fontsPDF=fonts;
         //this.metadataPDF=
-        this.imagesPDF=Images;
-
-        System.out.println("VERSION:"+verisonPDf);
-        System.out.println("Peso:"+size);
-        ReadData(offsetobjInfo);
-        System.out.println("PAGINAS:"+countPages);
-        System.out.println("FUENTES:");
-        for (int j = 0; j < fonts.size(); j++) {
-            System.out.println(fonts.get(j));
-        }
-        System.out.println("Cantidad de imagenes: " + Images);
-
+        //this.imagesPDF=Images;
+      
     }
- 
-
-    public String getNamePDF() {
-        return namePDF;
-    }
-
-    public String getVersionPDF() {
-        return versionPDF;
-    }
-
-    public Long getSizePDF() {
-        return sizePDF;
-    }
-
-    public Map<String, String> getMetadataPDF() {
-        return metadataPDF;
-    }
-
-    public int getPagesPDF() {
-        return pagesPDF;
-    }
-
-    public ArrayList<String> getFontsPDF() {
-        return fontsPDF;
-    }
-
-    public int getImagesPDF() {
-        return imagesPDF;
-    }
-
     
+    public void ShowInfo(){
+        System.out.println("Nombre: " + pdf.getName());
+        System.out.println("Version: " + pdf.getVersion());
+        System.out.println("Size: " + pdf.getSize());
+        System.out.println("Meta Datos: ");
+        Set<String> keys = (Set<String>) pdf.getMetadata().keySet();
+        for(String key:keys){
+            String valor = pdf.getMetadata().get(key);
+            System.out.println(key+" = "+valor);
+        }
+        //System.out.println(pdf.getMetadata());
+        System.out.println("Paginas: "+ pdf.getPages());
+        System.out.println("Fuentes: ");
+        for(int i=0;i<pdf.getFonts().size();i++){
+            System.out.println(pdf.getFonts().get(i));
+        }
+        System.out.println("Cantidad de Imagenes: " + pdf.getImages());
+    }
     
     /**
      * Metodo para Obtener el offset de la tabla Xref de manera
@@ -683,8 +671,10 @@ public class PdfMetadata {
      * Metodo para obtener los metadatos del PDF
      * @param offset de la etiqueta /Info
      */
-    private void ReadData(long offset) { // Leer infrmacion del PDF
+    private HashMap ReadData(long offset) { // Leer infrmacion del PDF
+        HashMap<String,String> metaData = new HashMap<>();
         try {
+            
             RandomAccessFile file = new RandomAccessFile(path, "r");
 
             boolean endobj = false;
@@ -706,8 +696,9 @@ public class PdfMetadata {
                         file.read(info_e);
 
                         if ("(".equals(new String(info_e))) {
-                            System.out.println("Etiqueta: " + etiqueta);
-                            etiqueta += "|";
+                           // System.out.println("Etiqueta: " + etiqueta);
+                            //etiqueta += "|";
+                            
                             boolean fin2 = false;
 
                             while (!fin2) {
@@ -715,8 +706,8 @@ public class PdfMetadata {
                                 file.read(info_d);
 
                                 if (")".equals(new String(info_d))) {
-                                    System.out.println("Data: " + data);
-                                    data += "|";
+                                    //System.out.println("Data: " + data);
+                                    //data += "|";
                                     fin2 = true;
 
                                 } else {
@@ -732,7 +723,8 @@ public class PdfMetadata {
                         }
 
                     }
-
+                    
+                    metaData.put(etiqueta, data);
                 }
 
                 if (">".equals(new String(info))) {
@@ -742,14 +734,21 @@ public class PdfMetadata {
                 }
 
             }
+            
+            
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return metaData;
     }
 
+    
+    
+    
     /**
      * Metodo para obtener el numero de Paginas de un PDF
      * @param offset del objeto con la estructura de las paginas
