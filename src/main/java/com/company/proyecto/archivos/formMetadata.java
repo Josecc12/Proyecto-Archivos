@@ -167,9 +167,7 @@ public class formMetadata extends javax.swing.JDialog {
                         System.out.println(lista[i].getName());
                         String path=lista[i].getAbsolutePath().replace("\\", "/");
                         PdfMetadata pdf=new PdfMetadata(path);
-                        System.out.println();
-                        System.out.println();
-                        System.out.println();
+                        pdf.ShowInfo();  
                     }
                 }
             }
