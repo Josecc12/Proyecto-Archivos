@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-       File file=new File("C:/Users/josed/Documents/Carpeta Prueba Archivos");
+       File file=new File("C:/Users/Adrian/Documents/Universdidad/Prueba1");
        mostrarCarpeta(file); 
 
 
@@ -50,9 +50,9 @@ public class Main {
                         System.out.println(lista[i].getName());
                         String path=lista[i].getAbsolutePath().replace("\\", "/");
                         PdfMetadata pdf=new PdfMetadata(path);
-                        System.out.println();
-                        System.out.println();
-                        System.out.println();
+                        pdf.ShowInfo();
+                        
+                        
                     }
                 }
             }
