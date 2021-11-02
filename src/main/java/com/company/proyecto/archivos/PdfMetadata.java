@@ -13,6 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Adrian Quixivix, Jose Chocoy, Emilio medina , Andre Gordillo
@@ -20,8 +23,14 @@ import java.util.Arrays;
  */
 
 public class PdfMetadata {
-    String path;
-    long xref;
+    
+   private String path;
+    private long xref;
+    private PDF pdf;
+    
+
+    
+    
 
     /**
      * Crea la classe PDFMetadata recibiendo como parametros:
@@ -29,7 +38,8 @@ public class PdfMetadata {
      */
     public PdfMetadata(String path) {
         this.path = path;
-
+        File file=new File(this.path);
+        
         //offset xref Table
          this.xref = getXref(-1);
 
@@ -71,29 +81,60 @@ public class PdfMetadata {
             Images = contImages(offset);
 
         }
-
         
-
-        System.out.println("VERSION:"+verisonPDf);
-        System.out.println("Peso:"+size);
-        ReadData(offsetobjInfo);
-        System.out.println("PAGINAS:"+countPages);
-        System.out.println("FUENTES:");
-        for (int j = 0; j < fonts.size(); j++) {
-            System.out.println(fonts.get(j));
+        this.pdf = new PDF();
+        this.pdf.setName(file.getName());
+        this.pdf.setVersion(verisonPDf);
+        this.pdf.setSize(size);
+        this.pdf.setPages(countPages);
+        this.pdf.setFonts(fonts);
+        this.pdf.setMetadata(this.ReadData(offsetobjInfo));
+        this.pdf.setImages(Images);
+        
+        
+        //this.namePDF =file.getName();
+       // this.versionPDF=verisonPDf;
+        //this.sizePDF=size;
+       // this.pagesPDF=countPages;
+        //this.fontsPDF=fonts;
+        //this.metadataPDF=
+        //this.imagesPDF=Images;
+      
+    }
+    
+    public void ShowInfo(){
+        System.out.println("Nombre: " + pdf.getName());
+        System.out.println("Version: " + pdf.getVersion());
+        System.out.println("Size: " + pdf.getSize());
+        System.out.println("Meta Datos: ");
+        Set<String> keys = (Set<String>) pdf.getMetadata().keySet();
+        for(String key:keys){
+            String valor = pdf.getMetadata().get(key);
+            System.out.println(key+" = "+valor);
         }
-        System.out.println("Cantidad de imagenes: " + Images);
-
+        //System.out.println(pdf.getMetadata());
+        System.out.println("Paginas: "+ pdf.getPages());
+        System.out.println("Fuentes: ");
+        for(int i=0;i<pdf.getFonts().size();i++){
+            System.out.println(pdf.getFonts().get(i));
+        }
+        System.out.println("Cantidad de Imagenes: " + pdf.getImages());
+        
+        System.out.println();
+        System.out.println();
     }
 
-  
+    public PDF getPdf() {
+        return pdf;
+    }
+       
     /**
      * Metodo para Obtener el offset de la tabla Xref de manera
      * recursiva, con lectura binaria hacia atras
      * @param offset un offset inicial -1 para la primera recusion
      * @return el offset de la tabla xref
      */
-    public long getXref(long offset) {
+    private long getXref(long offset) {
         String offsetString = "";
         long offsetInicial = offset;
         try {
@@ -160,7 +201,7 @@ public class PdfMetadata {
      * que lo contiene en xref table
      * @return indice del objeto con la etiqueta /Info
      */
-    public int getInfoObj() {
+    private int getInfoObj() {
         String obj = "";
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -211,7 +252,7 @@ public class PdfMetadata {
      * @return indice del objeto con la etiquet /Root
      */
     
-    public int getRootObj() {
+    private int getRootObj() {
         String obj = "";
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -261,7 +302,7 @@ public class PdfMetadata {
      * @return indice del objeto con la fuente
      */
     
-    public int getObjFont(long offset) {
+    private int getObjFont(long offset) {
         RandomAccessFile file;
         String objFont = "";
         try {
@@ -310,7 +351,7 @@ public class PdfMetadata {
      * @param offset del objeto /Root
      * @return indice del objeto /Pages
      */
-    public int getObjPages(long offset) {
+    private int getObjPages(long offset) {
         RandomAccessFile file;
         String objString = "";
         try {
@@ -360,7 +401,7 @@ public class PdfMetadata {
      * @param obj objeto del que se desea el offset
      * @return  offset del Objeto buscado
      */
-    public long getOffsetObj(long xref, int obj) {
+    private long getOffsetObj(long xref, int obj) {
         byte offsetObj[] = new byte[10];
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -389,7 +430,7 @@ public class PdfMetadata {
      * @param obj objeto al que se busca en la xref table
      * @return booleano si esta en rango
      */
-    public boolean inRange(long offset, int obj) {
+    private boolean inRange(long offset, int obj) {
         boolean inRange = false;
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -441,7 +482,7 @@ public class PdfMetadata {
      * @return valor inicial de la tabal Xref
      */
     
-    public int startRange(long offset) {
+    private int startRange(long offset) {
         String startRangeString = "";
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -474,7 +515,7 @@ public class PdfMetadata {
      * @param offset de la tabla Xref
      * @return  offset al inicio de los objetos
      */
-    public long beforeObj(long offset) {
+    private long beforeObj(long offset) {
         boolean OA = false;
         try {
             RandomAccessFile file = new RandomAccessFile(this.path, "rw");
@@ -504,7 +545,7 @@ public class PdfMetadata {
      * @param offset del objeto Con la estructura de las paginas
      * @return ArrayList con los indices de los objetos /Pages
      */
-    public ArrayList<Integer> getKidsPages(long offset) {
+    private ArrayList<Integer> getKidsPages(long offset) {
         ArrayList<Integer> kidsList = new ArrayList<Integer>();
         String objKid = "";
         try {
@@ -559,7 +600,7 @@ public class PdfMetadata {
      * Metodo para obtener el peso de un archivo PDF en Bytes
      * @return Bytes del PDF
      */
-    public long getFileSize() {
+    private long getFileSize() {
         long sizeF;
         File file = new File(path);
         sizeF = file.length();
@@ -570,7 +611,7 @@ public class PdfMetadata {
      * Metodo para obtener la version del PDF
      * @return Version del PDF
      */
-    public String getVersion() {
+    private String getVersion() {
         String obj = "";
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -593,7 +634,7 @@ public class PdfMetadata {
      * @param offset del objeto en el que se encuentra la etiqueta /Font
      * @return Nombre de la fuente utilizada.
      */
-    public String getFontName(long offset) {
+    private String getFontName(long offset) {
         String nameFont = "";
         try {
             RandomAccessFile file = new RandomAccessFile(path, "rw");
@@ -637,8 +678,10 @@ public class PdfMetadata {
      * Metodo para obtener los metadatos del PDF
      * @param offset de la etiqueta /Info
      */
-    public void ReadData(long offset) { // Leer infrmacion del PDF
+    private HashMap ReadData(long offset) { // Leer infrmacion del PDF
+        HashMap<String,String> metaData = new HashMap<>();
         try {
+            
             RandomAccessFile file = new RandomAccessFile(path, "r");
 
             boolean endobj = false;
@@ -660,8 +703,9 @@ public class PdfMetadata {
                         file.read(info_e);
 
                         if ("(".equals(new String(info_e))) {
-                            System.out.println("Etiqueta: " + etiqueta);
-                            etiqueta += "|";
+                           // System.out.println("Etiqueta: " + etiqueta);
+                            //etiqueta += "|";
+                            
                             boolean fin2 = false;
 
                             while (!fin2) {
@@ -669,8 +713,8 @@ public class PdfMetadata {
                                 file.read(info_d);
 
                                 if (")".equals(new String(info_d))) {
-                                    System.out.println("Data: " + data);
-                                    data += "|";
+                                    //System.out.println("Data: " + data);
+                                    //data += "|";
                                     fin2 = true;
 
                                 } else {
@@ -686,7 +730,8 @@ public class PdfMetadata {
                         }
 
                     }
-
+                    
+                    metaData.put(etiqueta, data);
                 }
 
                 if (">".equals(new String(info))) {
@@ -696,20 +741,27 @@ public class PdfMetadata {
                 }
 
             }
+            
+            
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return metaData;
     }
 
+    
+    
+    
     /**
      * Metodo para obtener el numero de Paginas de un PDF
      * @param offset del objeto con la estructura de las paginas
      * @return contador de paginas en el PDF
      */
-    public int getCountPages(long offset) {
+    private int getCountPages(long offset) {
         RandomAccessFile file;
         String countPages = "";
         try {
@@ -754,7 +806,7 @@ public class PdfMetadata {
      * @param offset de la pagina a buscar imagenes
      * @return contador de imagenes en la pagina
      */
-    public int contImages(long offset){
+    private int contImages(long offset){
         int cont = 0;
         try {
             RandomAccessFile file = new RandomAccessFile(path,"r");
