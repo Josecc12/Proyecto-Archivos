@@ -6,6 +6,7 @@
 package com.company.proyecto.archivos;
 
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 /**
@@ -154,7 +155,9 @@ public class formMetadata extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     public void mostrarCarpeta(File fichero) {
+     public  void mostrarCarpeta(File fichero) {
+        ArrayList<PDF> pdfs=new ArrayList<PDF>();
+        
         if (fichero.isDirectory()) {
             File[] lista = fichero.listFiles();
             for (int i = 0; i < lista.length; i++) {
@@ -167,11 +170,18 @@ public class formMetadata extends javax.swing.JDialog {
                         System.out.println(lista[i].getName());
                         String path=lista[i].getAbsolutePath().replace("\\", "/");
                         PdfMetadata pdf=new PdfMetadata(path);
-                        pdf.ShowInfo();  
+                        pdfs.add(pdf.getPdf());
+                        pdf.ShowInfo();
+                        
+                        
+                        
+                        
                     }
                 }
             }
         }
+        WriteBinaryFile write=new WriteBinaryFile(pdfs);
+        write.writeFile();
     }
    
     /**
