@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-       File file=new File("C:/Users/Adrian/Documents/Universdidad/Prueba1");
+       File file=new File("C:/Users/danie/OneDrive/Documentos/Prueba Archivos");
        mostrarCarpeta(file); 
 
 
@@ -38,6 +38,8 @@ public class Main {
    * @param fichero con el directorio a explorar
    */
     public static void mostrarCarpeta(File fichero) {
+        ArrayList<PDF> pdfs=new ArrayList<PDF>();
+        
         if (fichero.isDirectory()) {
             File[] lista = fichero.listFiles();
             for (int i = 0; i < lista.length; i++) {
@@ -50,13 +52,18 @@ public class Main {
                         System.out.println(lista[i].getName());
                         String path=lista[i].getAbsolutePath().replace("\\", "/");
                         PdfMetadata pdf=new PdfMetadata(path);
+                        pdfs.add(pdf.getPdf());
                         pdf.ShowInfo();
+                        
+                        
                         
                         
                     }
                 }
             }
         }
+        WriteBinaryFile write=new WriteBinaryFile(pdfs);
+        write.writeFile();
     }
    
     /**
