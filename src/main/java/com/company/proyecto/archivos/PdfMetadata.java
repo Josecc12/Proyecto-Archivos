@@ -119,8 +119,15 @@ public class PdfMetadata {
             System.out.println(pdf.getFonts().get(i));
         }
         System.out.println("Cantidad de Imagenes: " + pdf.getImages());
+        
+        System.out.println();
+        System.out.println();
     }
-    
+
+    public PDF getPdf() {
+        return pdf;
+    }
+       
     /**
      * Metodo para Obtener el offset de la tabla Xref de manera
      * recursiva, con lectura binaria hacia atras
