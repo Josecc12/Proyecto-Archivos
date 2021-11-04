@@ -5,6 +5,8 @@
  */
 package com.company.proyecto.archivos;
 
+import java.awt.Component;
+import java.awt.PopupMenu;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -39,14 +41,23 @@ public class formMetadata extends javax.swing.JDialog {
         btnSafe = new javax.swing.JButton();
         filesPanel = new javax.swing.JPanel();
         filesList = new java.awt.List();
+        jScrollPane1 = new javax.swing.JScrollPane();
         metadataPanel = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
         sizeLabel = new javax.swing.JLabel();
-        jScrollBar1 = new javax.swing.JScrollBar();
         nameField = new javax.swing.JTextField();
         versionField = new javax.swing.JTextField();
         sizeField = new javax.swing.JTextField();
+        metadataLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        metadataList = new javax.swing.JList<>();
+        pagesLabel = new javax.swing.JLabel();
+        fontsLabel = new javax.swing.JLabel();
+        imagesLabel = new javax.swing.JLabel();
+        pagesField = new javax.swing.JTextField();
+        fontsField = new javax.swing.JTextField();
+        imagesField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,7 +101,7 @@ public class formMetadata extends javax.swing.JDialog {
         );
         filesPanelLayout.setVerticalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
 
         metadataPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,6 +119,25 @@ public class formMetadata extends javax.swing.JDialog {
         sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         sizeLabel.setText("Tamaño:");
 
+        metadataLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        metadataLabel.setForeground(new java.awt.Color(0, 0, 0));
+        metadataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        metadataLabel.setText("Metadatos:");
+
+        jScrollPane2.setViewportView(metadataList);
+
+        pagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        pagesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        pagesLabel.setText("Paginas:");
+
+        fontsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        fontsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        fontsLabel.setText("Fuentes:");
+
+        imagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        imagesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        imagesLabel.setText("Imagenes:");
+
         javax.swing.GroupLayout metadataPanelLayout = new javax.swing.GroupLayout(metadataPanel);
         metadataPanel.setLayout(metadataPanelLayout);
         metadataPanelLayout.setHorizontalGroup(
@@ -115,6 +145,16 @@ public class formMetadata extends javax.swing.JDialog {
             .addGroup(metadataPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(fontsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fontsField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(imagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imagesField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(metadataLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(sizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,9 +166,12 @@ public class formMetadata extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameField)
-                            .addComponent(versionField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(versionField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(pagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pagesField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))
+                .addGap(19, 19, 19))
         );
         metadataPanelLayout.setVerticalGroup(
             metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +188,26 @@ public class formMetadata extends javax.swing.JDialog {
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sizeLabel)
                     .addComponent(sizeField))
-                .addContainerGap(196, Short.MAX_VALUE))
-            .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(metadataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pagesLabel)
+                    .addComponent(pagesField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fontsLabel)
+                    .addComponent(fontsField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imagesLabel)
+                    .addComponent(imagesField))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setViewportView(metadataPanel);
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
@@ -164,7 +224,7 @@ public class formMetadata extends javax.swing.JDialog {
                     .addGroup(BackgroundLayout.createSequentialGroup()
                         .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metadataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         BackgroundLayout.setVerticalGroup(
@@ -173,8 +233,8 @@ public class formMetadata extends javax.swing.JDialog {
                 .addComponent(btnExplore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(metadataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -260,6 +320,9 @@ public class formMetadata extends javax.swing.JDialog {
         nameField.setText(pdfs.get(filesList.getSelectedIndex()).getName());
         versionField.setText(pdfs.get(filesList.getSelectedIndex()).getVersion());
         sizeField.setText(pdfs.get(filesList.getSelectedIndex()).getSize().toString());
+        pagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getPages()));
+        fontsField.setText(pdfs.get(filesList.getSelectedIndex()).getFonts().toString());
+        imagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getImages()));
     }//GEN-LAST:event_filesListMouseClicked
 
     private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
@@ -315,10 +378,19 @@ public class formMetadata extends javax.swing.JDialog {
     private javax.swing.JButton btnSafe;
     private java.awt.List filesList;
     private javax.swing.JPanel filesPanel;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JTextField fontsField;
+    private javax.swing.JLabel fontsLabel;
+    private javax.swing.JTextField imagesField;
+    private javax.swing.JLabel imagesLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel metadataLabel;
+    private javax.swing.JList<String> metadataList;
     private javax.swing.JPanel metadataPanel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField pagesField;
+    private javax.swing.JLabel pagesLabel;
     private javax.swing.JTextField sizeField;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JTextField versionField;
