@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
  * @author HP
  */
 public class formMetadata extends javax.swing.JDialog {
+    ArrayList<PDF> pdfs=new ArrayList<PDF>();
 
     /**
      * Creates new form formMetadata
@@ -37,9 +38,15 @@ public class formMetadata extends javax.swing.JDialog {
         btnExplore = new javax.swing.JButton();
         btnSafe = new javax.swing.JButton();
         filesPanel = new javax.swing.JPanel();
-        lblFiles = new javax.swing.JLabel();
+        filesList = new java.awt.List();
         metadataPanel = new javax.swing.JPanel();
-        lblMetadata = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        versionLabel = new javax.swing.JLabel();
+        sizeLabel = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        nameField = new javax.swing.JTextField();
+        versionField = new javax.swing.JTextField();
+        sizeField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,40 +65,48 @@ public class formMetadata extends javax.swing.JDialog {
 
         btnSafe.setBackground(new java.awt.Color(204, 204, 204));
         btnSafe.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnSafe.setForeground(new java.awt.Color(0, 0, 0));
         btnSafe.setText("GUARDAR");
+        btnSafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSafeActionPerformed(evt);
+            }
+        });
 
         filesPanel.setBackground(new java.awt.Color(255, 255, 255));
         filesPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        lblFiles.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblFiles.setForeground(new java.awt.Color(0, 0, 0));
-        lblFiles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblFiles.setText("---");
+        filesList.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        filesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                filesListMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout filesPanelLayout = new javax.swing.GroupLayout(filesPanel);
         filesPanel.setLayout(filesPanelLayout);
         filesPanelLayout.setHorizontalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
         );
         filesPanelLayout.setVerticalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         metadataPanel.setBackground(new java.awt.Color(255, 255, 255));
         metadataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        lblMetadata.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblMetadata.setForeground(new java.awt.Color(0, 0, 0));
-        lblMetadata.setText("jLabel2");
+        nameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nameLabel.setText("Nombre:");
+
+        versionLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        versionLabel.setForeground(new java.awt.Color(0, 0, 0));
+        versionLabel.setText("Versión:");
+
+        sizeLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        sizeLabel.setText("Tamaño:");
 
         javax.swing.GroupLayout metadataPanelLayout = new javax.swing.GroupLayout(metadataPanel);
         metadataPanel.setLayout(metadataPanelLayout);
@@ -99,15 +114,39 @@ public class formMetadata extends javax.swing.JDialog {
             metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(metadataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMetadata, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(sizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sizeField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(versionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameField)
+                            .addComponent(versionField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         metadataPanelLayout.setVerticalGroup(
             metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(metadataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMetadata, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nameField)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(versionLabel)
+                    .addComponent(versionField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sizeLabel)
+                    .addComponent(sizeField))
+                .addContainerGap(196, Short.MAX_VALUE))
+            .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
@@ -156,7 +195,6 @@ public class formMetadata extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
      public  void mostrarCarpeta(File fichero) {
-        ArrayList<PDF> pdfs=new ArrayList<PDF>();
         
         if (fichero.isDirectory()) {
             File[] lista = fichero.listFiles();
@@ -175,13 +213,11 @@ public class formMetadata extends javax.swing.JDialog {
                         
                         
                         
-                        
+                        filesList.add(pdfs.get(i).getName());
                     }
                 }
             }
         }
-        WriteBinaryFile write=new WriteBinaryFile(pdfs);
-        write.writeFile();
     }
    
     /**
@@ -219,6 +255,17 @@ public class formMetadata extends javax.swing.JDialog {
             this.mostrarCarpeta(file);
         }
     }//GEN-LAST:event_btnExploreActionPerformed
+
+    private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+        nameField.setText(pdfs.get(filesList.getSelectedIndex()).getName());
+        versionField.setText(pdfs.get(filesList.getSelectedIndex()).getVersion());
+        sizeField.setText(pdfs.get(filesList.getSelectedIndex()).getSize().toString());
+    }//GEN-LAST:event_filesListMouseClicked
+
+    private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
+        WriteBinaryFile write=new WriteBinaryFile(pdfs);
+        write.writeFile();
+    }//GEN-LAST:event_btnSafeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,9 +313,15 @@ public class formMetadata extends javax.swing.JDialog {
     private javax.swing.JPanel Background;
     private javax.swing.JButton btnExplore;
     private javax.swing.JButton btnSafe;
+    private java.awt.List filesList;
     private javax.swing.JPanel filesPanel;
-    private javax.swing.JLabel lblFiles;
-    private javax.swing.JLabel lblMetadata;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JPanel metadataPanel;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField sizeField;
+    private javax.swing.JLabel sizeLabel;
+    private javax.swing.JTextField versionField;
+    private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables
 }
