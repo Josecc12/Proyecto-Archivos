@@ -186,30 +186,40 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="subjectLabel" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="creationdateLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="subjectField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="creationdateField" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="authorLabel" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="producerLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="authorField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="producerField" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="subjectLabel" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="subjectField" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="keywordsLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="keywordsField" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="fontsLabel" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="fontsField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="fontsField" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="imagesLabel" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="imagesField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="imagesField" max="32767" attributes="0"/>
                               </Group>
                               <Component id="metadataLabel" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="sizeLabel" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="sizeField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="sizeField" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -219,18 +229,33 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="nameField" max="32767" attributes="0"/>
-                                      <Component id="versionField" pref="282" max="32767" attributes="0"/>
+                                      <Component id="versionField" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="pagesLabel" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="pagesField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="pagesField" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="titleLabel" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="titleField" pref="282" max="32767" attributes="0"/>
+                                  <Component id="titleField" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="authorLabel1" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="authorField" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="moddateLabel" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="moddateField" min="-2" pref="218" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="creatorLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="creatorField" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
@@ -269,8 +294,33 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="authorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="keywordsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="keywordsField" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="authorLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="authorField" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="creationdateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="creationdateField" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="moddateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="moddateField" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="creatorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="creatorField" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="producerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="producerField" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -287,7 +337,7 @@
                               <Component id="imagesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="imagesField" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -405,7 +455,24 @@
                     <Property name="text" type="java.lang.String" value="Tema:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="authorLabel">
+                <Component class="javax.swing.JLabel" name="keywordsLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Palabras clave:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="titleField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="subjectField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="keywordsField">
+                </Component>
+                <Component class="javax.swing.JLabel" name="authorLabel1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="12" style="0"/>
@@ -416,11 +483,59 @@
                     <Property name="text" type="java.lang.String" value="Autor:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="titleField">
+                <Component class="javax.swing.JLabel" name="creationdateLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Fecha de creaci&#xf3;n:"/>
+                  </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="subjectField">
+                <Component class="javax.swing.JLabel" name="moddateLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Fecha de modificaci&#xf3;n:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="producerLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Programa productor:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="creatorLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Programa creador:"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="authorField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="creationdateField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="moddateField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="creatorField">
+                </Component>
+                <Component class="javax.swing.JTextField" name="producerField">
                 </Component>
               </SubComponents>
             </Container>

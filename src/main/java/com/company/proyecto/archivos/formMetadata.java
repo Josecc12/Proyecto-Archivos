@@ -59,10 +59,20 @@ public class formMetadata extends javax.swing.JDialog {
         imagesField = new javax.swing.JTextField();
         titleLabel = new javax.swing.JLabel();
         subjectLabel = new javax.swing.JLabel();
-        authorLabel = new javax.swing.JLabel();
+        keywordsLabel = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
         subjectField = new javax.swing.JTextField();
+        keywordsField = new javax.swing.JTextField();
+        authorLabel1 = new javax.swing.JLabel();
+        creationdateLabel = new javax.swing.JLabel();
+        moddateLabel = new javax.swing.JLabel();
+        producerLabel = new javax.swing.JLabel();
+        creatorLabel = new javax.swing.JLabel();
         authorField = new javax.swing.JTextField();
+        creationdateField = new javax.swing.JTextField();
+        moddateField = new javax.swing.JTextField();
+        creatorField = new javax.swing.JTextField();
+        producerField = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -151,9 +161,29 @@ public class formMetadata extends javax.swing.JDialog {
         subjectLabel.setForeground(new java.awt.Color(0, 0, 0));
         subjectLabel.setText("Tema:");
 
-        authorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        authorLabel.setForeground(new java.awt.Color(0, 0, 0));
-        authorLabel.setText("Autor:");
+        keywordsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        keywordsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        keywordsLabel.setText("Palabras clave:");
+
+        authorLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        authorLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        authorLabel1.setText("Autor:");
+
+        creationdateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        creationdateLabel.setForeground(new java.awt.Color(0, 0, 0));
+        creationdateLabel.setText("Fecha de creación:");
+
+        moddateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        moddateLabel.setForeground(new java.awt.Color(0, 0, 0));
+        moddateLabel.setText("Fecha de modificación:");
+
+        producerLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        producerLabel.setForeground(new java.awt.Color(0, 0, 0));
+        producerLabel.setText("Programa productor:");
+
+        creatorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        creatorLabel.setForeground(new java.awt.Color(0, 0, 0));
+        creatorLabel.setText("Programa creador:");
 
         javax.swing.GroupLayout metadataPanelLayout = new javax.swing.GroupLayout(metadataPanel);
         metadataPanel.setLayout(metadataPanelLayout);
@@ -163,26 +193,34 @@ public class formMetadata extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(creationdateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creationdateField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(producerLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(producerField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(subjectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(subjectField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(subjectField))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
-                        .addComponent(authorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(keywordsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(authorField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(keywordsField))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(fontsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fontsField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(fontsField))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(imagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imagesField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(imagesField))
                     .addComponent(metadataLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(sizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sizeField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(sizeField))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(versionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,15 +228,27 @@ public class formMetadata extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameField)
-                            .addComponent(versionField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
+                            .addComponent(versionField)))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(pagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pagesField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                        .addComponent(pagesField))
                     .addGroup(metadataPanelLayout.createSequentialGroup()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
+                        .addComponent(titleField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(authorLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(authorField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metadataPanelLayout.createSequentialGroup()
+                        .addComponent(moddateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moddateField, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(creatorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creatorField)))
                 .addGap(19, 19, 19))
         );
         metadataPanelLayout.setVerticalGroup(
@@ -228,8 +278,28 @@ public class formMetadata extends javax.swing.JDialog {
                     .addComponent(subjectField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(authorLabel)
+                    .addComponent(keywordsLabel)
+                    .addComponent(keywordsField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(authorLabel1)
                     .addComponent(authorField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationdateLabel)
+                    .addComponent(creationdateField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(moddateLabel)
+                    .addComponent(moddateField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creatorLabel)
+                    .addComponent(creatorField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(producerLabel)
+                    .addComponent(producerField))
                 .addGap(18, 18, 18)
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pagesLabel)
@@ -242,7 +312,7 @@ public class formMetadata extends javax.swing.JDialog {
                 .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imagesLabel)
                     .addComponent(imagesField))
-                .addGap(202, 202, 202))
+                .addGap(98, 98, 98))
         );
 
         jScrollPane1.setViewportView(metadataPanel);
@@ -360,7 +430,12 @@ public class formMetadata extends javax.swing.JDialog {
         sizeField.setText(pdfs.get(filesList.getSelectedIndex()).getSize().toString());
         titleField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Title"));
         subjectField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Subject"));
+        keywordsField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Keywords"));
         authorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Author"));
+        creationdateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("CreationDate"));
+        moddateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("ModDate"));
+        creatorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Creator"));
+        producerField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Producer"));
         pagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getPages()));
         fontsField.setText(pdfs.get(filesList.getSelectedIndex()).getFonts().toString());
         imagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getImages()));
@@ -416,9 +491,13 @@ public class formMetadata extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JTextField authorField;
-    private javax.swing.JLabel authorLabel;
+    private javax.swing.JLabel authorLabel1;
     private javax.swing.JButton btnExplore;
     private javax.swing.JButton btnSafe;
+    private javax.swing.JTextField creationdateField;
+    private javax.swing.JLabel creationdateLabel;
+    private javax.swing.JTextField creatorField;
+    private javax.swing.JLabel creatorLabel;
     private java.awt.List filesList;
     private javax.swing.JPanel filesPanel;
     private javax.swing.JTextField fontsField;
@@ -427,12 +506,18 @@ public class formMetadata extends javax.swing.JDialog {
     private javax.swing.JLabel imagesLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keywordsField;
+    private javax.swing.JLabel keywordsLabel;
     private javax.swing.JLabel metadataLabel;
     private javax.swing.JPanel metadataPanel;
+    private javax.swing.JTextField moddateField;
+    private javax.swing.JLabel moddateLabel;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField pagesField;
     private javax.swing.JLabel pagesLabel;
+    private javax.swing.JTextField producerField;
+    private javax.swing.JLabel producerLabel;
     private javax.swing.JTextField sizeField;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JTextField subjectField;
