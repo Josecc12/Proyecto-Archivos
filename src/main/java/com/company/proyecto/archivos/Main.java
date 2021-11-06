@@ -25,8 +25,8 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-       File file=new File("C:/Users/Adrian/Documents/Universdidad/Prueba1");
-       mostrarCarpeta(file); 
+       //File file=new File("C:/Users/danie/OneDrive/Documentos/Prueba Archivos");
+       //mostrarCarpeta(file); 
 
 
         
@@ -37,7 +37,7 @@ public class Main {
    * En busca de formtamos PDF y leer sus metadatos
    * @param fichero con el directorio a explorar
    */
-    public static void mostrarCarpeta(File fichero) {
+    /*public static void mostrarCarpeta(File fichero) {
         ArrayList<PDF> pdfs=new ArrayList<PDF>();
         ReadBinaryFile Read = new ReadBinaryFile();
         
@@ -71,7 +71,7 @@ public class Main {
      * @param name path del fichero
      * @return booleano si es PDF
      */
-    public static boolean isPDF(String name) {
+    /*public static boolean isPDF(String name) {
 
         int len = name.length();
         String res = "";
@@ -90,6 +90,6 @@ public class Main {
 
         return false;
 
-    }
+    }*/
 
 }
