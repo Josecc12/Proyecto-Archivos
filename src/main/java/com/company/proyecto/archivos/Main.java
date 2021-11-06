@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-       File file=new File("C:/Users/danie/OneDrive/Documentos/Prueba Archivos");
+       File file=new File("C:/Users/Adrian/Documents/Universdidad/Prueba1");
        mostrarCarpeta(file); 
 
 
@@ -39,6 +39,7 @@ public class Main {
    */
     public static void mostrarCarpeta(File fichero) {
         ArrayList<PDF> pdfs=new ArrayList<PDF>();
+        ReadBinaryFile Read = new ReadBinaryFile();
         
         if (fichero.isDirectory()) {
             File[] lista = fichero.listFiles();
@@ -55,15 +56,14 @@ public class Main {
                         pdfs.add(pdf.getPdf());
                         pdf.ShowInfo();
                         
-                        
-                        
-                        
                     }
                 }
             }
         }
         WriteBinaryFile write=new WriteBinaryFile(pdfs);
         write.writeFile();
+        Read.ReadFile();
+
     }
    
     /**
