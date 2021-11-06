@@ -149,7 +149,7 @@ public class formMetadata extends javax.swing.JDialog {
 
         subjectLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         subjectLabel.setForeground(new java.awt.Color(0, 0, 0));
-        subjectLabel.setText("Subject");
+        subjectLabel.setText("Tema:");
 
         authorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         authorLabel.setForeground(new java.awt.Color(0, 0, 0));
