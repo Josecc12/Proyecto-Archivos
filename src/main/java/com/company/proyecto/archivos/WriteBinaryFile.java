@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author josed
  */
 public class WriteBinaryFile {
-    
+   
     private ArrayList<PDF> pdfs;
 
     public WriteBinaryFile(ArrayList<PDF> pdfs) {
@@ -27,6 +27,7 @@ public class WriteBinaryFile {
     public void writeFile(){
         try {
             RandomAccessFile file=new RandomAccessFile("datos.bin","rw");
+            
             file.writeBytes("ADES");
             for(int i=0;i<this.pdfs.size();i++){
                 file.write(pdfs.get(i).getName().length());
