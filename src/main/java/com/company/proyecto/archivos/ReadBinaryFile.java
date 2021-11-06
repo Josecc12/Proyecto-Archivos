@@ -11,6 +11,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,32 @@ public class ReadBinaryFile {
     
     public ReadBinaryFile(){
         this.pdfList = new ArrayList<PDF>();
+    }
+    
+    public void showInfo() {
+        for (int i = 0; i < this.pdfList.size(); i++) {
+            PDF pdf=pdfList.get(i);
+            System.out.println("Nombre: " + pdf.getName());
+            System.out.println("Version: " + pdf.getVersion());
+            System.out.println("Size: " + pdf.getSize());
+            System.out.println("Meta Datos: ");
+            Set<String> keys = (Set<String>) pdf.getMetadata().keySet();
+            for (String key : keys) {
+                String valor = pdf.getMetadata().get(key);
+                System.out.println(key + " = " + valor);
+            }
+            //System.out.println(pdf.getMetadata());
+            System.out.println("Paginas: " + pdf.getPages());
+            System.out.println("Fuentes: ");
+            for (int j = 0; j < pdf.getFonts().size(); j++) {
+                System.out.println(pdf.getFonts().get(j));
+            }
+            System.out.println("Cantidad de Imagenes: " + pdf.getImages());
+
+            System.out.println();
+            System.out.println();
+
+        }
     }
     
     public void ReadFile(){
@@ -40,7 +67,7 @@ public class ReadBinaryFile {
             file.seek(0);
             byte ades[] = new byte[4];
             file.read(ades);
-            System.out.println(new String(ades));
+            
           if("ADES".equals(new String(ades))){
               boolean fin = false;
               
@@ -51,14 +78,14 @@ public class ReadBinaryFile {
               byte nombre[] = new byte[size];
               file.read(nombre);
               String name = new String(nombre);
-              System.out.println(name);
+             
               data.setName(name);
               
               size = file.readByte();
               byte ver[] = new byte[size];
               file.read(ver);
               String version = new String(ver);
-              System.out.println(version);
+             
               data.setVersion(version);
               
               long size2 = file.readLong();
@@ -69,7 +96,7 @@ public class ReadBinaryFile {
                   byte titulo [] = new byte[size];
                   file.read(titulo);
                   String title = new String(titulo);
-                  System.out.println(title);
+                 
                   metadata.put("Title", title);
               }
               
@@ -80,7 +107,7 @@ public class ReadBinaryFile {
                   byte subjet [] = new byte[size];
                   file.read(subjet);
                   String subj = new String(subjet);
-                  System.out.println(subj);
+                  
                   metadata.put("Subject", subj);
               }
               
@@ -91,7 +118,7 @@ public class ReadBinaryFile {
                   byte keywrods [] = new byte[size];
                   file.read(keywrods);
                   String keyW = new String(keywrods);
-                  System.out.println(keyW);
+                  
                   metadata.put("Keywords", keyW);
               }
               
@@ -102,7 +129,7 @@ public class ReadBinaryFile {
                   byte author [] = new byte[size];
                   file.read(author);
                   String autor = new String(author);
-                  System.out.println(autor);
+                
                   metadata.put("Author", autor);
               }
               
@@ -112,7 +139,7 @@ public class ReadBinaryFile {
                   byte CreationDate [] = new byte[size];
                   file.read(CreationDate);
                   String date = new String(CreationDate);
-                  System.out.println(date);
+                  
                   metadata.put("CreationDate", date); 
               }
               
@@ -122,7 +149,7 @@ public class ReadBinaryFile {
                   byte ModDate [] = new byte[size];
                   file.read(ModDate);
                   String mdate = new String(ModDate);
-                  System.out.println(mdate);
+                
                   metadata.put("ModDate", mdate);
               }
               
@@ -132,7 +159,7 @@ public class ReadBinaryFile {
                   byte Creador [] = new byte[size];
                   file.read(Creador);
                   String Creator = new String(Creador);
-                  System.out.println(Creator);
+                  
                   metadata.put("Cretor", Creator);
               }
               
@@ -142,24 +169,24 @@ public class ReadBinaryFile {
                   byte Lproducer [] = new byte[size];
                   file.read(Lproducer);
                   String productor = new String(Lproducer);
-                  System.out.println(productor);
+                 
                   metadata.put("Producer", productor);
                   
               }
               
               
               int page = file.readInt();
-              System.out.println(page);
+              
               data.setPages(page);
               int images = file.readInt();
-              System.out.println(images);
+             
               data.setImages(images);
               byte items = file.readByte();
              
               
               for(int i=0;i<items;i++){
                   size = file.readByte();
-                  System.out.println(size);
+                
                   byte fuente[] = new byte[size];
                   file.read(fuente);
                   String font = new String(fuente);
@@ -177,7 +204,7 @@ public class ReadBinaryFile {
               
               data.setFonts(fonts);
               data.setMetadata(metadata);
-              System.out.println(data.getMetadata().get("Title"));
+             
               this.pdfList.add(data);
               }
               
