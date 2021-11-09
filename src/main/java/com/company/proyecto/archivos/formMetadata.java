@@ -73,6 +73,7 @@ public class formMetadata extends javax.swing.JDialog {
         moddateField = new javax.swing.JTextField();
         creatorField = new javax.swing.JTextField();
         producerField = new javax.swing.JTextField();
+        btnChanges = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -136,6 +137,24 @@ public class formMetadata extends javax.swing.JDialog {
         sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         sizeLabel.setText("Tamaño:");
 
+        nameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFieldKeyReleased(evt);
+            }
+        });
+
+        versionField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                versionFieldKeyReleased(evt);
+            }
+        });
+
+        sizeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                sizeFieldKeyReleased(evt);
+            }
+        });
+
         metadataLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         metadataLabel.setForeground(new java.awt.Color(0, 0, 0));
         metadataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -153,6 +172,24 @@ public class formMetadata extends javax.swing.JDialog {
         imagesLabel.setForeground(new java.awt.Color(0, 0, 0));
         imagesLabel.setText("Imagenes:");
 
+        pagesField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pagesFieldKeyReleased(evt);
+            }
+        });
+
+        fontsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fontsFieldKeyReleased(evt);
+            }
+        });
+
+        imagesField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                imagesFieldKeyReleased(evt);
+            }
+        });
+
         titleLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(0, 0, 0));
         titleLabel.setText("Titulo:");
@@ -164,6 +201,24 @@ public class formMetadata extends javax.swing.JDialog {
         keywordsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         keywordsLabel.setForeground(new java.awt.Color(0, 0, 0));
         keywordsLabel.setText("Palabras clave:");
+
+        titleField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                titleFieldKeyReleased(evt);
+            }
+        });
+
+        subjectField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                subjectFieldKeyReleased(evt);
+            }
+        });
+
+        keywordsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                keywordsFieldKeyReleased(evt);
+            }
+        });
 
         authorLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         authorLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,6 +239,36 @@ public class formMetadata extends javax.swing.JDialog {
         creatorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         creatorLabel.setForeground(new java.awt.Color(0, 0, 0));
         creatorLabel.setText("Programa creador:");
+
+        authorField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                authorFieldKeyReleased(evt);
+            }
+        });
+
+        creationdateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                creationdateFieldKeyReleased(evt);
+            }
+        });
+
+        moddateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                moddateFieldKeyReleased(evt);
+            }
+        });
+
+        creatorField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                creatorFieldKeyReleased(evt);
+            }
+        });
+
+        producerField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                producerFieldKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout metadataPanelLayout = new javax.swing.GroupLayout(metadataPanel);
         metadataPanel.setLayout(metadataPanelLayout);
@@ -317,6 +402,16 @@ public class formMetadata extends javax.swing.JDialog {
 
         jScrollPane1.setViewportView(metadataPanel);
 
+        btnChanges.setBackground(new java.awt.Color(204, 204, 204));
+        btnChanges.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnChanges.setText("APLICAR");
+        btnChanges.setEnabled(false);
+        btnChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
         BackgroundLayout.setHorizontalGroup(
@@ -325,14 +420,17 @@ public class formMetadata extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnExplore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSafe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                                .addComponent(btnChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         BackgroundLayout.setVerticalGroup(
@@ -344,7 +442,9 @@ public class formMetadata extends javax.swing.JDialog {
                     .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -414,6 +514,15 @@ public class formMetadata extends javax.swing.JDialog {
 
     }
     
+    public void enableChangesButton() {
+        if (!nameField.getText().isEmpty()) {
+            btnChanges.setEnabled(true);
+        }
+        else {
+            btnChanges.setEnabled(false);
+        }
+    }
+    
     private void btnExploreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploreActionPerformed
         JFileChooser filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -445,6 +554,66 @@ public class formMetadata extends javax.swing.JDialog {
         WriteBinaryFile write=new WriteBinaryFile(pdfs);
         write.writeFile();
     }//GEN-LAST:event_btnSafeActionPerformed
+
+    private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangesActionPerformed
+
+    private void nameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_nameFieldKeyReleased
+
+    private void versionFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_versionFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_versionFieldKeyReleased
+
+    private void sizeFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sizeFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_sizeFieldKeyReleased
+
+    private void titleFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_titleFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_titleFieldKeyReleased
+
+    private void subjectFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_subjectFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_subjectFieldKeyReleased
+
+    private void keywordsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keywordsFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_keywordsFieldKeyReleased
+
+    private void authorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_authorFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_authorFieldKeyReleased
+
+    private void creationdateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creationdateFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_creationdateFieldKeyReleased
+
+    private void moddateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_moddateFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_moddateFieldKeyReleased
+
+    private void creatorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creatorFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_creatorFieldKeyReleased
+
+    private void producerFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_producerFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_producerFieldKeyReleased
+
+    private void pagesFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pagesFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_pagesFieldKeyReleased
+
+    private void fontsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fontsFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_fontsFieldKeyReleased
+
+    private void imagesFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imagesFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_imagesFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -492,6 +661,7 @@ public class formMetadata extends javax.swing.JDialog {
     private javax.swing.JPanel Background;
     private javax.swing.JTextField authorField;
     private javax.swing.JLabel authorLabel1;
+    private javax.swing.JButton btnChanges;
     private javax.swing.JButton btnExplore;
     private javax.swing.JButton btnSafe;
     private javax.swing.JTextField creationdateField;
