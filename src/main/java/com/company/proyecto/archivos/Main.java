@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-       File file=new File("C:/Users/Adrian/Documents/Universdidad/Prueba1");
+       File file=new File("C:/Users/danie/OneDrive/Documentos/Prueba Archivos");
        mostrarCarpeta(file); 
 
 
@@ -61,8 +61,8 @@ public class Main {
                 }
             }
         }
-        WriteBinaryFile write=new WriteBinaryFile(pdfs);
-        write.writeFile();
+        //WriteBinaryFile write=new WriteBinaryFile(pdfs);
+        //write.writeFile();
         Read.ReadFile();
         Read.showInfo();
 
