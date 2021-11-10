@@ -9,6 +9,9 @@ import java.awt.Component;
 import java.awt.PopupMenu;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
 
 /**
@@ -556,7 +559,24 @@ public class formMetadata extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSafeActionPerformed
 
     private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
-        // TODO add your handling code here:
+       HashMap<String, String> metadataMap = new HashMap<>();
+       metadataMap.put("Title", titleField.getText());
+       metadataMap.put("Subject", subjectField.getText());
+       metadataMap.put("Keywords", keywordsField.getText());
+       metadataMap.put("Author", authorField.getText());
+       metadataMap.put("CreationDate", creationdateField.getText());
+       metadataMap.put("ModDate", moddateField.getText());
+       metadataMap.put("Creator", creationdateField.getText());
+       metadataMap.put("Producer", producerField.getText());
+        ArrayList<String> fontsList = new ArrayList<String>(Arrays.asList(fontsField.getText()));
+        
+        pdfs.get(filesList.getSelectedIndex()).setName(nameField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setVersion(versionField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setSize(Long.parseLong(sizeField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setMetadata(metadataMap);
+        pdfs.get(filesList.getSelectedIndex()).setPages(Integer.parseInt(pagesField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setFonts(fontsList);
+        pdfs.get(filesList.getSelectedIndex()).setImages(Integer.parseInt(imagesField.getText()));
     }//GEN-LAST:event_btnChangesActionPerformed
 
     private void nameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFieldKeyReleased
