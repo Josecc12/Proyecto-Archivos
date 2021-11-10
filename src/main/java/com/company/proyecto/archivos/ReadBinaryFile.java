@@ -50,11 +50,15 @@ public class ReadBinaryFile {
             System.out.println();
 
         }
+        
+        System.out.println("PRUEBAS:");
+        System.out.println(this.pdfList.get(0).getName());
+        System.out.println(this.pdfList.get(1).getName());
     }
     
     public void ReadFile(){
         
-        PDF data = new PDF();
+        
         HashMap<String,String> metadata = new HashMap<>();
         ArrayList<String> fonts = new ArrayList<String>();
         try {
@@ -72,7 +76,7 @@ public class ReadBinaryFile {
               boolean fin = false;
               
               while(!fin){
-                                
+              PDF data = new PDF();                
             
               byte size = file.readByte();
               byte nombre[] = new byte[size];
@@ -101,7 +105,7 @@ public class ReadBinaryFile {
               }
               
                size = file.readByte();
-               System.out.println(size);
+               
               
               if(size !=0){
                   byte subjet [] = new byte[size];

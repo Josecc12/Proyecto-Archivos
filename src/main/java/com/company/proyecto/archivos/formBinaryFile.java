@@ -36,14 +36,44 @@ public class formBinaryFile extends javax.swing.JDialog {
         btnExplore = new javax.swing.JButton();
         btnSafe = new javax.swing.JButton();
         filesPanel = new javax.swing.JPanel();
-        lblFiles = new javax.swing.JLabel();
+        filesList = new java.awt.List();
+        jScrollPane1 = new javax.swing.JScrollPane();
         metadataPanel = new javax.swing.JPanel();
-        lblMetadata = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        versionLabel = new javax.swing.JLabel();
+        sizeLabel = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        versionField = new javax.swing.JTextField();
+        sizeField = new javax.swing.JTextField();
+        metadataLabel = new javax.swing.JLabel();
+        pagesLabel = new javax.swing.JLabel();
+        fontsLabel = new javax.swing.JLabel();
+        imagesLabel = new javax.swing.JLabel();
+        pagesField = new javax.swing.JTextField();
+        fontsField = new javax.swing.JTextField();
+        imagesField = new javax.swing.JTextField();
+        titleLabel = new javax.swing.JLabel();
+        subjectLabel = new javax.swing.JLabel();
+        keywordsLabel = new javax.swing.JLabel();
+        titleField = new javax.swing.JTextField();
+        subjectField = new javax.swing.JTextField();
+        keywordsField = new javax.swing.JTextField();
+        authorLabel1 = new javax.swing.JLabel();
+        creationdateLabel = new javax.swing.JLabel();
+        moddateLabel = new javax.swing.JLabel();
+        producerLabel = new javax.swing.JLabel();
+        creatorLabel = new javax.swing.JLabel();
+        authorField = new javax.swing.JTextField();
+        creationdateField = new javax.swing.JTextField();
+        moddateField = new javax.swing.JTextField();
+        creatorField = new javax.swing.JTextField();
+        producerField = new javax.swing.JTextField();
+        btnChanges = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Background.setBackground(new java.awt.Color(204, 204, 204));
-        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER ARCHIVO BINARIO   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
+        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER METADATOS PDF   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
 
         btnExplore.setBackground(new java.awt.Color(0, 51, 255));
         btnExplore.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -57,40 +87,181 @@ public class formBinaryFile extends javax.swing.JDialog {
 
         btnSafe.setBackground(new java.awt.Color(204, 204, 204));
         btnSafe.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnSafe.setForeground(new java.awt.Color(0, 0, 0));
         btnSafe.setText("GUARDAR");
+        btnSafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSafeActionPerformed(evt);
+            }
+        });
 
         filesPanel.setBackground(new java.awt.Color(255, 255, 255));
         filesPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        lblFiles.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblFiles.setForeground(new java.awt.Color(0, 0, 0));
-        lblFiles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblFiles.setText("---");
+        filesList.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        filesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                filesListMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout filesPanelLayout = new javax.swing.GroupLayout(filesPanel);
         filesPanel.setLayout(filesPanelLayout);
         filesPanelLayout.setHorizontalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
         );
         filesPanelLayout.setVerticalGroup(
             filesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(filesList, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
 
         metadataPanel.setBackground(new java.awt.Color(255, 255, 255));
         metadataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        lblMetadata.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblMetadata.setForeground(new java.awt.Color(0, 0, 0));
-        lblMetadata.setText("jLabel2");
+        nameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nameLabel.setText("Nombre:");
+
+        versionLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        versionLabel.setForeground(new java.awt.Color(0, 0, 0));
+        versionLabel.setText("Versión:");
+
+        sizeLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        sizeLabel.setText("Tamaño:");
+
+        nameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameFieldKeyReleased(evt);
+            }
+        });
+
+        versionField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                versionFieldKeyReleased(evt);
+            }
+        });
+
+        sizeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                sizeFieldKeyReleased(evt);
+            }
+        });
+
+        metadataLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        metadataLabel.setForeground(new java.awt.Color(0, 0, 0));
+        metadataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        metadataLabel.setText("Metadatos:");
+
+        pagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        pagesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        pagesLabel.setText("Paginas:");
+
+        fontsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        fontsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        fontsLabel.setText("Fuentes:");
+
+        imagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        imagesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        imagesLabel.setText("Imagenes:");
+
+        pagesField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pagesFieldKeyReleased(evt);
+            }
+        });
+
+        fontsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fontsFieldKeyReleased(evt);
+            }
+        });
+
+        imagesField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                imagesFieldKeyReleased(evt);
+            }
+        });
+
+        titleLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setText("Titulo:");
+
+        subjectLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        subjectLabel.setForeground(new java.awt.Color(0, 0, 0));
+        subjectLabel.setText("Tema:");
+
+        keywordsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        keywordsLabel.setForeground(new java.awt.Color(0, 0, 0));
+        keywordsLabel.setText("Palabras clave:");
+
+        titleField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                titleFieldKeyReleased(evt);
+            }
+        });
+
+        subjectField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                subjectFieldKeyReleased(evt);
+            }
+        });
+
+        keywordsField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                keywordsFieldKeyReleased(evt);
+            }
+        });
+
+        authorLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        authorLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        authorLabel1.setText("Autor:");
+
+        creationdateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        creationdateLabel.setForeground(new java.awt.Color(0, 0, 0));
+        creationdateLabel.setText("Fecha de creación:");
+
+        moddateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        moddateLabel.setForeground(new java.awt.Color(0, 0, 0));
+        moddateLabel.setText("Fecha de modificación:");
+
+        producerLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        producerLabel.setForeground(new java.awt.Color(0, 0, 0));
+        producerLabel.setText("Programa productor:");
+
+        creatorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        creatorLabel.setForeground(new java.awt.Color(0, 0, 0));
+        creatorLabel.setText("Programa creador:");
+
+        authorField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                authorFieldKeyReleased(evt);
+            }
+        });
+
+        creationdateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                creationdateFieldKeyReleased(evt);
+            }
+        });
+
+        moddateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                moddateFieldKeyReleased(evt);
+            }
+        });
+
+        creatorField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                creatorFieldKeyReleased(evt);
+            }
+        });
+
+        producerField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                producerFieldKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout metadataPanelLayout = new javax.swing.GroupLayout(metadataPanel);
         metadataPanel.setLayout(metadataPanelLayout);
@@ -98,16 +269,141 @@ public class formBinaryFile extends javax.swing.JDialog {
             metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(metadataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMetadata, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(creationdateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creationdateField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(producerLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(producerField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(subjectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(subjectField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(keywordsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(keywordsField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(fontsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fontsField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(imagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imagesField))
+                    .addComponent(metadataLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(sizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sizeField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(versionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameField)
+                            .addComponent(versionField)))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(pagesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pagesField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(titleField))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(authorLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(authorField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, metadataPanelLayout.createSequentialGroup()
+                        .addComponent(moddateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(moddateField, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(metadataPanelLayout.createSequentialGroup()
+                        .addComponent(creatorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creatorField)))
+                .addGap(19, 19, 19))
         );
         metadataPanelLayout.setVerticalGroup(
             metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(metadataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMetadata, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nameField)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(versionLabel)
+                    .addComponent(versionField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sizeLabel)
+                    .addComponent(sizeField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(metadataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleLabel)
+                    .addComponent(titleField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subjectLabel)
+                    .addComponent(subjectField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(keywordsLabel)
+                    .addComponent(keywordsField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(authorLabel1)
+                    .addComponent(authorField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationdateLabel)
+                    .addComponent(creationdateField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(moddateLabel)
+                    .addComponent(moddateField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creatorLabel)
+                    .addComponent(creatorField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(producerLabel)
+                    .addComponent(producerField))
+                .addGap(18, 18, 18)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pagesLabel)
+                    .addComponent(pagesField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fontsLabel)
+                    .addComponent(fontsField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(metadataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imagesLabel)
+                    .addComponent(imagesField))
+                .addGap(98, 98, 98))
         );
+
+        jScrollPane1.setViewportView(metadataPanel);
+
+        btnChanges.setBackground(new java.awt.Color(204, 204, 204));
+        btnChanges.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnChanges.setText("APLICAR");
+        btnChanges.setEnabled(false);
+        btnChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
@@ -117,14 +413,17 @@ public class formBinaryFile extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnExplore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSafe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metadataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                                .addComponent(btnChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         BackgroundLayout.setVerticalGroup(
@@ -133,10 +432,12 @@ public class formBinaryFile extends javax.swing.JDialog {
                 .addComponent(btnExplore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(metadataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -144,7 +445,7 @@ public class formBinaryFile extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,6 +455,15 @@ public class formBinaryFile extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void enableChangesButton() {
+        if (!nameField.getText().isEmpty()) {
+            btnChanges.setEnabled(true);
+        }
+        else {
+            btnChanges.setEnabled(false);
+        }
+    }
+    
     private void btnExploreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploreActionPerformed
         JFileChooser filechooser = new JFileChooser();
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -162,6 +472,72 @@ public class formBinaryFile extends javax.swing.JDialog {
             File file = filechooser.getSelectedFile();
         }
     }//GEN-LAST:event_btnExploreActionPerformed
+
+    private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
+    }//GEN-LAST:event_btnSafeActionPerformed
+
+    private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+    }//GEN-LAST:event_filesListMouseClicked
+
+    private void nameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_nameFieldKeyReleased
+
+    private void versionFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_versionFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_versionFieldKeyReleased
+
+    private void sizeFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sizeFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_sizeFieldKeyReleased
+
+    private void pagesFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pagesFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_pagesFieldKeyReleased
+
+    private void fontsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fontsFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_fontsFieldKeyReleased
+
+    private void imagesFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imagesFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_imagesFieldKeyReleased
+
+    private void titleFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_titleFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_titleFieldKeyReleased
+
+    private void subjectFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_subjectFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_subjectFieldKeyReleased
+
+    private void keywordsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keywordsFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_keywordsFieldKeyReleased
+
+    private void authorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_authorFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_authorFieldKeyReleased
+
+    private void creationdateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creationdateFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_creationdateFieldKeyReleased
+
+    private void moddateFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_moddateFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_moddateFieldKeyReleased
+
+    private void creatorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_creatorFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_creatorFieldKeyReleased
+
+    private void producerFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_producerFieldKeyReleased
+        enableChangesButton();
+    }//GEN-LAST:event_producerFieldKeyReleased
+
+    private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +583,41 @@ public class formBinaryFile extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
+    private javax.swing.JTextField authorField;
+    private javax.swing.JLabel authorLabel1;
+    private javax.swing.JButton btnChanges;
     private javax.swing.JButton btnExplore;
     private javax.swing.JButton btnSafe;
+    private javax.swing.JTextField creationdateField;
+    private javax.swing.JLabel creationdateLabel;
+    private javax.swing.JTextField creatorField;
+    private javax.swing.JLabel creatorLabel;
+    private java.awt.List filesList;
     private javax.swing.JPanel filesPanel;
-    private javax.swing.JLabel lblFiles;
-    private javax.swing.JLabel lblMetadata;
+    private javax.swing.JTextField fontsField;
+    private javax.swing.JLabel fontsLabel;
+    private javax.swing.JTextField imagesField;
+    private javax.swing.JLabel imagesLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keywordsField;
+    private javax.swing.JLabel keywordsLabel;
+    private javax.swing.JLabel metadataLabel;
     private javax.swing.JPanel metadataPanel;
+    private javax.swing.JTextField moddateField;
+    private javax.swing.JLabel moddateLabel;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField pagesField;
+    private javax.swing.JLabel pagesLabel;
+    private javax.swing.JTextField producerField;
+    private javax.swing.JLabel producerLabel;
+    private javax.swing.JTextField sizeField;
+    private javax.swing.JLabel sizeLabel;
+    private javax.swing.JTextField subjectField;
+    private javax.swing.JLabel subjectLabel;
+    private javax.swing.JTextField titleField;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JTextField versionField;
+    private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables
 }
