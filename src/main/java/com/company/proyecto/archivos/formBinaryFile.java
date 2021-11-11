@@ -73,7 +73,7 @@ public class formBinaryFile extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Background.setBackground(new java.awt.Color(204, 204, 204));
-        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER METADATOS PDF   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
+        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LEER METADATOS PDF   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
 
         btnExplore.setBackground(new java.awt.Color(0, 51, 255));
         btnExplore.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -119,15 +119,12 @@ public class formBinaryFile extends javax.swing.JDialog {
         metadataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         nameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Nombre:");
 
         versionLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        versionLabel.setForeground(new java.awt.Color(0, 0, 0));
         versionLabel.setText("Versión:");
 
         sizeLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         sizeLabel.setText("Tamaño:");
 
         nameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -149,20 +146,16 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         metadataLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        metadataLabel.setForeground(new java.awt.Color(0, 0, 0));
         metadataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         metadataLabel.setText("Metadatos:");
 
         pagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        pagesLabel.setForeground(new java.awt.Color(0, 0, 0));
         pagesLabel.setText("Paginas:");
 
         fontsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        fontsLabel.setForeground(new java.awt.Color(0, 0, 0));
         fontsLabel.setText("Fuentes:");
 
         imagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        imagesLabel.setForeground(new java.awt.Color(0, 0, 0));
         imagesLabel.setText("Imagenes:");
 
         pagesField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -184,15 +177,12 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         titleLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
         titleLabel.setText("Titulo:");
 
         subjectLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        subjectLabel.setForeground(new java.awt.Color(0, 0, 0));
         subjectLabel.setText("Tema:");
 
         keywordsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        keywordsLabel.setForeground(new java.awt.Color(0, 0, 0));
         keywordsLabel.setText("Palabras clave:");
 
         titleField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -214,23 +204,18 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         authorLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        authorLabel1.setForeground(new java.awt.Color(0, 0, 0));
         authorLabel1.setText("Autor:");
 
         creationdateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        creationdateLabel.setForeground(new java.awt.Color(0, 0, 0));
         creationdateLabel.setText("Fecha de creación:");
 
         moddateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        moddateLabel.setForeground(new java.awt.Color(0, 0, 0));
         moddateLabel.setText("Fecha de modificación:");
 
         producerLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        producerLabel.setForeground(new java.awt.Color(0, 0, 0));
         producerLabel.setText("Programa productor:");
 
         creatorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        creatorLabel.setForeground(new java.awt.Color(0, 0, 0));
         creatorLabel.setText("Programa creador:");
 
         authorField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -537,6 +522,24 @@ public class formBinaryFile extends javax.swing.JDialog {
 
     private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
         // TODO add your handling code here:
+        HashMap<String, String> metadataMap = new HashMap<>();
+       metadataMap.put("Title", titleField.getText());
+       metadataMap.put("Subject", subjectField.getText());
+       metadataMap.put("Keywords", keywordsField.getText());
+       metadataMap.put("Author", authorField.getText());
+       metadataMap.put("CreationDate", creationdateField.getText());
+       metadataMap.put("ModDate", moddateField.getText());
+       metadataMap.put("Creator", creationdateField.getText());
+       metadataMap.put("Producer", producerField.getText());
+        ArrayList<String> fontsList = new ArrayList<String>(Arrays.asList(fontsField.getText()));
+        
+        pdfs.get(filesList.getSelectedIndex()).setName(nameField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setVersion(versionField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setSize(Long.parseLong(sizeField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setMetadata(metadataMap);
+        pdfs.get(filesList.getSelectedIndex()).setPages(Integer.parseInt(pagesField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setFonts(fontsList);
+        pdfs.get(filesList.getSelectedIndex()).setImages(Integer.parseInt(imagesField.getText()));
     }//GEN-LAST:event_btnChangesActionPerformed
 
     /**
