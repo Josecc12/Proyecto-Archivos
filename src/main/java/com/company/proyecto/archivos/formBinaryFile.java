@@ -5,7 +5,13 @@
  */
 package com.company.proyecto.archivos;
 
+import java.awt.Component;
+import java.awt.PopupMenu;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
 
 /**
@@ -13,6 +19,8 @@ import javax.swing.JFileChooser;
  * @author HP
  */
 public class formBinaryFile extends javax.swing.JDialog {
+
+    ArrayList<PDF> pdfs = new ArrayList<PDF>();
 
     /**
      * Creates new form formBinaryFile
@@ -443,25 +451,50 @@ public class formBinaryFile extends javax.swing.JDialog {
     public void enableChangesButton() {
         if (!nameField.getText().isEmpty()) {
             btnChanges.setEnabled(true);
-        }
-        else {
+        } else {
             btnChanges.setEnabled(false);
         }
     }
-    
+
     private void btnExploreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploreActionPerformed
         JFileChooser filechooser = new JFileChooser();
-        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int selection = filechooser.showOpenDialog(this);
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
+            ReadBinaryFile read = new ReadBinaryFile();
+            read.ReadFile();
+            pdfs = read.getPdfList();
+            for (int i = 0; i < pdfs.size(); i++) {
+                filesList.add(pdfs.get(i).getName());
+            }
         }
     }//GEN-LAST:event_btnExploreActionPerformed
 
     private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
+        WriteBinaryFile write = new WriteBinaryFile(pdfs);
+        write.writeFile();
+
+
     }//GEN-LAST:event_btnSafeActionPerformed
 
     private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+        nameField.setText(pdfs.get(filesList.getSelectedIndex()).getName());
+        versionField.setText(pdfs.get(filesList.getSelectedIndex()).getVersion());
+        sizeField.setText(pdfs.get(filesList.getSelectedIndex()).getSize().toString());
+        titleField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Title"));
+        subjectField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Subject"));
+        keywordsField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Keywords"));
+        authorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Author"));
+        creationdateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("CreationDate"));
+        moddateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("ModDate"));
+        creatorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Creator"));
+        producerField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Producer"));
+        pagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getPages()));
+        fontsField.setText(pdfs.get(filesList.getSelectedIndex()).getFonts().toString());
+        imagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getImages()));
+
+        
     }//GEN-LAST:event_filesListMouseClicked
 
     private void nameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFieldKeyReleased
@@ -523,16 +556,16 @@ public class formBinaryFile extends javax.swing.JDialog {
     private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
         // TODO add your handling code here:
         HashMap<String, String> metadataMap = new HashMap<>();
-       metadataMap.put("Title", titleField.getText());
-       metadataMap.put("Subject", subjectField.getText());
-       metadataMap.put("Keywords", keywordsField.getText());
-       metadataMap.put("Author", authorField.getText());
-       metadataMap.put("CreationDate", creationdateField.getText());
-       metadataMap.put("ModDate", moddateField.getText());
-       metadataMap.put("Creator", creationdateField.getText());
-       metadataMap.put("Producer", producerField.getText());
+        metadataMap.put("Title", titleField.getText());
+        metadataMap.put("Subject", subjectField.getText());
+        metadataMap.put("Keywords", keywordsField.getText());
+        metadataMap.put("Author", authorField.getText());
+        metadataMap.put("CreationDate", creationdateField.getText());
+        metadataMap.put("ModDate", moddateField.getText());
+        metadataMap.put("Creator", creationdateField.getText());
+        metadataMap.put("Producer", producerField.getText());
         ArrayList<String> fontsList = new ArrayList<String>(Arrays.asList(fontsField.getText()));
-        
+
         pdfs.get(filesList.getSelectedIndex()).setName(nameField.getText());
         pdfs.get(filesList.getSelectedIndex()).setVersion(versionField.getText());
         pdfs.get(filesList.getSelectedIndex()).setSize(Long.parseLong(sizeField.getText()));
