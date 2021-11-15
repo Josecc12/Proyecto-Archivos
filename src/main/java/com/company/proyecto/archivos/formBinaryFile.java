@@ -488,8 +488,9 @@ public class formBinaryFile extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExploreActionPerformed
 
     private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
+        String name = documentField.getText();
         WriteBinaryFile write = new WriteBinaryFile(pdfs);
-        write.writeFile();
+        write.writeFile(name);
 
 
     }//GEN-LAST:event_btnSafeActionPerformed
