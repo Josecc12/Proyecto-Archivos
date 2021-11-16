@@ -97,7 +97,7 @@ public class formMetadata extends javax.swing.JDialog {
             }
         });
 
-        btnSafe.setBackground(new java.awt.Color(204, 204, 204));
+        btnSafe.setBackground(new java.awt.Color(255, 255, 255));
         btnSafe.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSafe.setText("GUARDAR");
         btnSafe.addActionListener(new java.awt.event.ActionListener() {
@@ -407,7 +407,7 @@ public class formMetadata extends javax.swing.JDialog {
 
         jScrollPane1.setViewportView(metadataPanel);
 
-        btnChanges.setBackground(new java.awt.Color(204, 204, 204));
+        btnChanges.setBackground(new java.awt.Color(255, 255, 255));
         btnChanges.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnChanges.setText("APLICAR");
         btnChanges.setEnabled(false);
