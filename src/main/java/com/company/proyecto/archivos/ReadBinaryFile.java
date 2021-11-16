@@ -168,7 +168,7 @@ public class ReadBinaryFile {
                   file.read(Creador);
                   String Creator = new String(Creador);
                   
-                  metadata.put("Cretor", Creator);
+                  metadata.put("Creator", Creator);
               }
               
               size = file.readByte();

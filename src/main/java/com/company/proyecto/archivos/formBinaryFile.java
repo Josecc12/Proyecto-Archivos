@@ -83,7 +83,7 @@ public class formBinaryFile extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Background.setBackground(new java.awt.Color(204, 204, 204));
-        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER ARCHIVO BINARIO   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
+        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LEER ARCHIVO BINARIO   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
 
         btnExplore.setBackground(new java.awt.Color(0, 51, 255));
         btnExplore.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -401,7 +401,6 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         documentLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        documentLabel.setForeground(new java.awt.Color(0, 0, 0));
         documentLabel.setText("Nombre del documento:");
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
