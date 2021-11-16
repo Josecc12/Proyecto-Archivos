@@ -60,13 +60,13 @@ public class ReadBinaryFile {
 
     }
     
-    public void ReadFile(){
+    public void ReadFile(String documentName){
         
         
         
         try {
             
-            RandomAccessFile file = new RandomAccessFile("datos.bin","r");
+            RandomAccessFile file = new RandomAccessFile(documentName ,"r");
             
             int tamanio = file.read();
             

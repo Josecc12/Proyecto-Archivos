@@ -479,7 +479,9 @@ public class formBinaryFile extends javax.swing.JDialog {
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
             ReadBinaryFile read = new ReadBinaryFile();
-            read.ReadFile();
+            read.ReadFile(file.getName());
+            String documentName = file.getName().replace(".bin", "");
+            documentField.setText(documentName);
             pdfs = read.getPdfList();
             for (int i = 0; i < pdfs.size(); i++) {
                 filesList.add(pdfs.get(i).getName());
