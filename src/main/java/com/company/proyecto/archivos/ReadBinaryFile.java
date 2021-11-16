@@ -25,6 +25,12 @@ public class ReadBinaryFile {
     public ReadBinaryFile(){
         this.pdfList = new ArrayList<PDF>();
     }
+
+    public ArrayList<PDF> getPdfList() {
+        return pdfList;
+    }
+    
+    
     
     public void showInfo() {
         for (int i = 0; i < this.pdfList.size(); i++) {
@@ -51,19 +57,16 @@ public class ReadBinaryFile {
 
         }
         
-        System.out.println("PRUEBAS:");
-        System.out.println(this.pdfList.get(0).getName());
-        System.out.println(this.pdfList.get(1).getName());
+
     }
     
-    public void ReadFile(){
+    public void ReadFile(String documentName){
         
         
-        HashMap<String,String> metadata = new HashMap<>();
-        ArrayList<String> fonts = new ArrayList<String>();
+        
         try {
             
-            RandomAccessFile file = new RandomAccessFile("datos.bin","r");
+            RandomAccessFile file = new RandomAccessFile(documentName ,"r");
             
             int tamanio = file.read();
             
@@ -77,7 +80,8 @@ public class ReadBinaryFile {
               
               while(!fin){
               PDF data = new PDF();                
-            
+              HashMap<String,String> metadata = new HashMap<>();
+              ArrayList<String> fonts = new ArrayList<String>();
               byte size = file.readByte();
               byte nombre[] = new byte[size];
               file.read(nombre);

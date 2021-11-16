@@ -24,9 +24,10 @@ public class WriteBinaryFile {
         this.pdfs =pdfs;
     }
     
-    public void writeFile(){
+    public void writeFile(String name){
         try {
-            RandomAccessFile file=new RandomAccessFile("datos.bin","rw");
+            String documentName = name + ".bin";
+            RandomAccessFile file=new RandomAccessFile(documentName,"rw");
             
             file.writeBytes("ADES");
             for(int i=0;i<this.pdfs.size();i++){

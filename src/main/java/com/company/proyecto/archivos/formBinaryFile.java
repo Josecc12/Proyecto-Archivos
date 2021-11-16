@@ -5,7 +5,13 @@
  */
 package com.company.proyecto.archivos;
 
+import java.awt.Component;
+import java.awt.PopupMenu;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
 
 /**
@@ -13,6 +19,8 @@ import javax.swing.JFileChooser;
  * @author HP
  */
 public class formBinaryFile extends javax.swing.JDialog {
+
+    ArrayList<PDF> pdfs = new ArrayList<PDF>();
 
     /**
      * Creates new form formBinaryFile
@@ -69,11 +77,13 @@ public class formBinaryFile extends javax.swing.JDialog {
         creatorField = new javax.swing.JTextField();
         producerField = new javax.swing.JTextField();
         btnChanges = new javax.swing.JButton();
+        documentLabel = new javax.swing.JLabel();
+        documentField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Background.setBackground(new java.awt.Color(204, 204, 204));
-        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER METADATOS PDF   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
+        Background.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "LEER ARCHIVO BINARIO   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(0, 51, 255))); // NOI18N
 
         btnExplore.setBackground(new java.awt.Color(0, 51, 255));
         btnExplore.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -119,15 +129,12 @@ public class formBinaryFile extends javax.swing.JDialog {
         metadataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         nameLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        nameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nameLabel.setText("Nombre:");
 
         versionLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        versionLabel.setForeground(new java.awt.Color(0, 0, 0));
         versionLabel.setText("Versión:");
 
         sizeLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        sizeLabel.setForeground(new java.awt.Color(0, 0, 0));
         sizeLabel.setText("Tamaño:");
 
         nameField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -149,20 +156,16 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         metadataLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        metadataLabel.setForeground(new java.awt.Color(0, 0, 0));
         metadataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         metadataLabel.setText("Metadatos:");
 
         pagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        pagesLabel.setForeground(new java.awt.Color(0, 0, 0));
         pagesLabel.setText("Paginas:");
 
         fontsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        fontsLabel.setForeground(new java.awt.Color(0, 0, 0));
         fontsLabel.setText("Fuentes:");
 
         imagesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        imagesLabel.setForeground(new java.awt.Color(0, 0, 0));
         imagesLabel.setText("Imagenes:");
 
         pagesField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -184,15 +187,12 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         titleLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
         titleLabel.setText("Titulo:");
 
         subjectLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        subjectLabel.setForeground(new java.awt.Color(0, 0, 0));
         subjectLabel.setText("Tema:");
 
         keywordsLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        keywordsLabel.setForeground(new java.awt.Color(0, 0, 0));
         keywordsLabel.setText("Palabras clave:");
 
         titleField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -214,23 +214,18 @@ public class formBinaryFile extends javax.swing.JDialog {
         });
 
         authorLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        authorLabel1.setForeground(new java.awt.Color(0, 0, 0));
         authorLabel1.setText("Autor:");
 
         creationdateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        creationdateLabel.setForeground(new java.awt.Color(0, 0, 0));
         creationdateLabel.setText("Fecha de creación:");
 
         moddateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        moddateLabel.setForeground(new java.awt.Color(0, 0, 0));
         moddateLabel.setText("Fecha de modificación:");
 
         producerLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        producerLabel.setForeground(new java.awt.Color(0, 0, 0));
         producerLabel.setText("Programa productor:");
 
         creatorLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        creatorLabel.setForeground(new java.awt.Color(0, 0, 0));
         creatorLabel.setText("Programa creador:");
 
         authorField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -405,6 +400,10 @@ public class formBinaryFile extends javax.swing.JDialog {
             }
         });
 
+        documentLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        documentLabel.setForeground(new java.awt.Color(0, 0, 0));
+        documentLabel.setText("Nombre del documento:");
+
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
         BackgroundLayout.setHorizontalGroup(
@@ -416,20 +415,30 @@ public class formBinaryFile extends javax.swing.JDialog {
                         .addComponent(filesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addComponent(documentLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnExplore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                                 .addComponent(btnChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnSafe, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
+                                .addComponent(documentField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExplore, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BackgroundLayout.createSequentialGroup()
-                .addComponent(btnExplore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExplore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(documentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(documentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(10, 10, 10)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(filesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -458,25 +467,53 @@ public class formBinaryFile extends javax.swing.JDialog {
     public void enableChangesButton() {
         if (!nameField.getText().isEmpty()) {
             btnChanges.setEnabled(true);
-        }
-        else {
+        } else {
             btnChanges.setEnabled(false);
         }
     }
-    
+
     private void btnExploreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploreActionPerformed
         JFileChooser filechooser = new JFileChooser();
-        filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int selection = filechooser.showOpenDialog(this);
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
+            ReadBinaryFile read = new ReadBinaryFile();
+            read.ReadFile(file.getName());
+            String documentName = file.getName().replace(".bin", "");
+            documentField.setText(documentName);
+            pdfs = read.getPdfList();
+            for (int i = 0; i < pdfs.size(); i++) {
+                filesList.add(pdfs.get(i).getName());
+            }
         }
     }//GEN-LAST:event_btnExploreActionPerformed
 
     private void btnSafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSafeActionPerformed
+        String name = documentField.getText();
+        WriteBinaryFile write = new WriteBinaryFile(pdfs);
+        write.writeFile(name);
+
+
     }//GEN-LAST:event_btnSafeActionPerformed
 
     private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+        nameField.setText(pdfs.get(filesList.getSelectedIndex()).getName());
+        versionField.setText(pdfs.get(filesList.getSelectedIndex()).getVersion());
+        sizeField.setText(pdfs.get(filesList.getSelectedIndex()).getSize().toString());
+        titleField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Title"));
+        subjectField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Subject"));
+        keywordsField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Keywords"));
+        authorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Author"));
+        creationdateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("CreationDate"));
+        moddateField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("ModDate"));
+        creatorField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Creator"));
+        producerField.setText(pdfs.get(filesList.getSelectedIndex()).getMetadata().get("Producer"));
+        pagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getPages()));
+        fontsField.setText(pdfs.get(filesList.getSelectedIndex()).getFonts().toString());
+        imagesField.setText(Integer.toString(pdfs.get(filesList.getSelectedIndex()).getImages()));
+
+        
     }//GEN-LAST:event_filesListMouseClicked
 
     private void nameFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameFieldKeyReleased
@@ -537,6 +574,24 @@ public class formBinaryFile extends javax.swing.JDialog {
 
     private void btnChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangesActionPerformed
         // TODO add your handling code here:
+        HashMap<String, String> metadataMap = new HashMap<>();
+        metadataMap.put("Title", titleField.getText());
+        metadataMap.put("Subject", subjectField.getText());
+        metadataMap.put("Keywords", keywordsField.getText());
+        metadataMap.put("Author", authorField.getText());
+        metadataMap.put("CreationDate", creationdateField.getText());
+        metadataMap.put("ModDate", moddateField.getText());
+        metadataMap.put("Creator", creationdateField.getText());
+        metadataMap.put("Producer", producerField.getText());
+        ArrayList<String> fontsList = new ArrayList<String>(Arrays.asList(fontsField.getText()));
+
+        pdfs.get(filesList.getSelectedIndex()).setName(nameField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setVersion(versionField.getText());
+        pdfs.get(filesList.getSelectedIndex()).setSize(Long.parseLong(sizeField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setMetadata(metadataMap);
+        pdfs.get(filesList.getSelectedIndex()).setPages(Integer.parseInt(pagesField.getText()));
+        pdfs.get(filesList.getSelectedIndex()).setFonts(fontsList);
+        pdfs.get(filesList.getSelectedIndex()).setImages(Integer.parseInt(imagesField.getText()));
     }//GEN-LAST:event_btnChangesActionPerformed
 
     /**
@@ -592,6 +647,8 @@ public class formBinaryFile extends javax.swing.JDialog {
     private javax.swing.JLabel creationdateLabel;
     private javax.swing.JTextField creatorField;
     private javax.swing.JLabel creatorLabel;
+    private javax.swing.JTextField documentField;
+    private javax.swing.JLabel documentLabel;
     private java.awt.List filesList;
     private javax.swing.JPanel filesPanel;
     private javax.swing.JTextField fontsField;
